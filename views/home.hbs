@@ -7,12 +7,11 @@
     <!-- Bootstrap core CSS -->
     <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/css/bootstrap.min.css" integrity="sha384-Gn5384xqQ1aoWXA+058RXPxPg6fy4IWvTNh0E263XmFcJlSAwiGgFAW/dAiS6JXm" crossorigin="anonymous">
     <link rel='stylesheet' href='/stylesheets/style.css' />
-    <link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.5.0/css/all.css" integrity="sha384-B4dIYHKNBt8Bc12p+WXckhzcICo0wtJAoU8YZTY5qE0Id1GSseTk6S+L3BlXeVIU" crossorigin="anonymous">
   </head>
   <body>
     <!-- Nav bar -->
     <nav class="navbar navbar-expand-md navbar-dark bg-dark mb-4">
-      <a class="navbar-brand" href="/">Rentsy</a>
+      <a class="navbar-brand" href="/">Node Graph Tutorial</a>
       <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarCollapse" aria-controls="navbarCollapse" aria-expanded="false" aria-label="Toggle navigation">
         <span class="navbar-toggler-icon"></span>
       </button>
@@ -50,25 +49,14 @@
 
       <!-- Debug output -->
       {{#if debug}}
-        <div>
-        </div>
-      {{else}}
-      <div class="card">
+        <div class="card">
           <div class="card-body">
             <h5 class="card-title">Debug</h5>
             <pre class="bg-light border p-3"><code>{{debug}}</code></pre>
           </div>
-      </div>  
+        </div>
       {{/if}}
     </main>
-
-    <footer class="page-footer font-small blue card-footer">
-      <!-- Copyright -->
-      <div class="footer-copyright text-center py-3">© 2020 Fonticons, Inc. from:
-        <a href="https://fontawesome.com/" title="Fonticons.">https://fontawesome.com/</a>
-      </div>
-      <!-- Copyright -->      
-    </footer>
 
     <!-- Bootstrap core JavaScript
     ================================================== -->
