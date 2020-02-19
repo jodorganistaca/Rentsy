@@ -2,3 +2,112 @@ pre {
   word-wrap: break-word;
   white-space: pre-wrap;
 }
+/* Para 960px */  /*For laptop*/
+@media only screen and (min-width: 821px) {  
+	.jumbotron {
+		padding: 4rem 2rem;   
+	    right: 4%;
+	    left: 4%;
+	}
+
+	.searchbar:hover > .search_input{		
+		width: 450px;
+	}
+}  
+  
+/* Para 800px */  /*For laptop tablets*/
+@media only screen and (max-width: 820px) and (min-width: 621px) {  
+	.searchbar:hover > .search_input{		
+		width: 450px;
+	}
+}  
+  
+/* Para 600px */  /* For tablets: */
+@media only screen and (max-width: 620px) and (min-width: 501px) {  
+	.searchbar:hover > .search_input{		
+		width: 400px;
+	}
+}  
+  
+/* Para 480px */  /* For mobile phones: */
+@media only screen and (max-width: 500px) and (min-width: 341px) {  
+	.searchbar:hover > .search_input{		
+		width: 250px;
+	}
+}  
+  
+/* Para 320px */  /* For mobile phones: */
+@media only screen and (max-width: 340px) and (min-width: 5px)  {  
+	.searchbar:hover > .search_input{		
+		width:150px;
+	}
+} 
+
+.jumbotron {    
+    top: 30%;
+    bottom: inherit;
+    text-align: center;
+}
+
+.searchbar{
+    margin-bottom: auto;
+    margin-top: auto;
+    height: 60px;
+    background-color: #353b48;
+    border-radius: 30px;
+    padding: 10px;
+}
+
+.search_input{
+    color: white;
+    border: 0;
+    outline: 0;
+	background: none;
+	padding: 0 10px;
+	width: 0;
+	min-width: 161px;
+    caret-color:transparent;
+    line-height: 40px;
+    transition: width 0.4s linear;
+}
+
+a:not([href]):not([tabindex]) {
+    color: white;
+    text-decoration: none;
+}
+
+.searchbar:hover > .search_input{
+	padding: 0 10px;	
+	caret-color:red;
+	transition: width 0.4s linear;
+}
+
+.searchbar:hover > .search_icon{
+	background: white;
+	color: #e74c3c;
+}
+
+.search_icon{
+    height: 40px;
+    width: 40px;
+    float: right;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    border-radius: 50%;
+    color:white;
+	text-decoration:none;
+}
+
+.container {
+  position: relative;
+  min-height: 100vh;
+}
+
+#footer {
+  position: absolute;
+  bottom: 0;
+  width: 100%;
+  height: 2.5rem;            /* Footer height */
+}
+
