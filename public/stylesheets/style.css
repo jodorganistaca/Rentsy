@@ -2,3 +2,30 @@ pre {
   word-wrap: break-word;
   white-space: pre-wrap;
 }
+@media (min-width: 576px){
+	/*For laptop*/
+	.jumbotron {
+		padding: 4rem 2rem;    
+	    position: fixed;
+	    right: 4%;
+	    left: 4%;
+	}
+}
+
+@media only screen and (max-width: 768px) {
+  /* For mobile phones: */
+  .jumbotron {
+	    position: fixed;
+	    right: 4%;
+	    left: 4%;
+	}
+}
+
+.jumbotron {
+    
+    top: 30%;
+    bottom: inherit;
+    text-align: center;
+}
+
+
