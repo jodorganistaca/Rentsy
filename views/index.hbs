@@ -2,7 +2,13 @@
   <h1>Rentsy</h1>
   <p class="lead">Plataforma web para arrendar objetos dentro de la Universidad</p>
   {{#if user}}
-    <p>Welcome {{user}}!</p>
+    <p>Bienvenido {{user}}!</p>
+    <div class="d-flex justify-content-center h-100">
+        <div class="searchbar">
+          <input class="search_input" type="text" name="" placeholder="Buscar objeto...">
+          <a href="/views/error.hbs" class="search_icon"><i class="fas fa-search"></i></a>
+        </div>
+    </div>
   {{else}}
   	<p>Esta app usa una API de Microsoft para acceder con Outlook</p>
     <a class="btn btn-primary btn-large" href="{{signInUrl}}">Inicia Sesión!</a>
