@@ -6,4 +6,8 @@ router.get('/', function(req, res, next) {
   res.send('respond with a resource');
 });
 
+router.get('/schedule', function(req, res, next) {
+  //res.send('Schedule Test');
+  res.render('schedule');
+});
 module.exports = router;
