@@ -3,7 +3,8 @@
   "version": "0.1.0",
   "private": true,
   "scripts": {
-    "start": "nodemon ./bin/www"
+    "start": "nodemon ./bin/www",
+    "precommit": "lint-staged"
   },
   "dependencies": {
     "cookie-parser": "~1.4.4",
@@ -12,9 +13,11 @@
     "express": "~4.16.1",
     "hbs": "^4.1.0",
     "http-errors": "~1.6.3",
+    "husky": "^4.2.3",
     "jsonwebtoken": "^8.5.1",
+    "lint-staged": "^10.0.7",
+    "litepicker": "^1.0.29",
     "morgan": "~1.9.1",
-    "prettier": "^1.19.1",
     "simple-oauth2": "^3.3.0"
   },
   "description": "plataforma web para arrendar objetos dentro de la Universidad",
@@ -22,7 +25,9 @@
   "devDependencies": {
     "eslint": "^6.8.0",
     "eslint-config-prettier": "^6.10.0",
-    "nodemon": "^2.0.2"
+    "eslint-plugin-prettier": "^3.1.2",
+    "nodemon": "^2.0.2",
+    "prettier": "^1.19.1"
   },
   "repository": {
     "type": "git",
