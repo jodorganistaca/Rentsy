@@ -8,6 +8,17 @@
     <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/css/bootstrap.min.css" integrity="sha384-Gn5384xqQ1aoWXA+058RXPxPg6fy4IWvTNh0E263XmFcJlSAwiGgFAW/dAiS6JXm" crossorigin="anonymous">
     <link rel='stylesheet' href='/stylesheets/style.css' />
     <link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.5.0/css/all.css" integrity="sha384-B4dIYHKNBt8Bc12p+WXckhzcICo0wtJAoU8YZTY5qE0Id1GSseTk6S+L3BlXeVIU" crossorigin="anonymous">
+    <!-- FullCalendar core CSS -->
+    <link href='node_modules/@fullcalendar/core/main.css' rel='stylesheet' />
+    <link href='node_modules/@fullcalendar/daygrid/main.css' rel='stylesheet' />
+    <link href='node_modules/@fullcalendar/timegrid/main.css' rel='stylesheet' />
+    <!-- FullCalendar core JS -->
+    <script src='node_modules/@fullcalendar/core/main.js'></script>
+    <script src='node_modules/@fullcalendar/daygrid/main.js'></script>
+    <script src='node_modules/@fullcalendar/timegrid/main.js'></script>
+    <script src="node_modules/@fullcalendar/core/locales/es.js"></script>
+    <script src="https://unpkg.com/sweetalert/dist/sweetalert.min.js"></script>
+    <script type="text/javascript" src="http://ajax.googleapis.com/ajax/libs/jquery/1.5/jquery.min.js"></script>
   </head>
   <body>
     <!-- Nav bar -->
@@ -23,7 +34,7 @@
           </li>
           {{#if user}}
             <li class="nav-item">
-              <a class="nav-link" href="/users/schedule">Schedule</a>
+              <a class="nav-link" href="/schedule">Schedule</a>
             </li>
             <li class="nav-item{{#if active.inbox}} active{{/if}}">
               <a class="nav-link" href="/mail">Inbox</a>
@@ -73,6 +84,8 @@
       <!-- Copyright -->      
     </footer>
 
+
+    
     <!-- Bootstrap core JavaScript
     ================================================== -->
     <script src="https://code.jquery.com/jquery-3.2.1.slim.min.js" integrity="sha384-KJ3o2DKtIkvYIK3UENzmM7KCkRr/rE9/Qpg6aAZGJwFDMVNA/GpGFF93hXpG5KkN" crossorigin="anonymous"></script>
