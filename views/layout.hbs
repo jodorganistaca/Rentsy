@@ -1,81 +1,137 @@
 <!DOCTYPE html>
 <html>
-  <head>
-    <meta charset="utf-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
-    <title>{{title}}</title>
-    <!-- Bootstrap core CSS -->
-    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/css/bootstrap.min.css" integrity="sha384-Gn5384xqQ1aoWXA+058RXPxPg6fy4IWvTNh0E263XmFcJlSAwiGgFAW/dAiS6JXm" crossorigin="anonymous">
-    <link rel='stylesheet' href='/stylesheets/style.css' />
-    <link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.5.0/css/all.css" integrity="sha384-B4dIYHKNBt8Bc12p+WXckhzcICo0wtJAoU8YZTY5qE0Id1GSseTk6S+L3BlXeVIU" crossorigin="anonymous">
-  </head>
-  <body>
-    <!-- Nav bar -->
-    <nav class="navbar navbar-expand-md navbar-dark bg-dark mb-4">
-      <a class="navbar-brand" href="/">Rentsy</a>
-      <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarCollapse" aria-controls="navbarCollapse" aria-expanded="false" aria-label="Toggle navigation">
-        <span class="navbar-toggler-icon"></span>
-      </button>
-      <div class="collapse navbar-collapse" id="navbarCollapse">
-        <ul class="navbar-nav mr-auto">
-          <li class="nav-item{{#if active.home}} active{{/if}}">
-            <a class="nav-link" href="/">Home</a>
-          </li>
-          {{#if user}}
-            <li class="nav-item{{#if active.inbox}} active{{/if}}">
-              <a class="nav-link" href="/mail">Inbox</a>
-            </li>
-          {{/if}}
-        </ul>
-        <ul class="navbar-nav justify-content-end">
-          {{#if user}}
-            <li class="nav-item dropdown">
-              <a class="nav-link dropdown-toggle" data-toggle="dropdown" href="#" role="button" aria-haspopup="true" aria-expanded="false">{{user}}</a>
-              <div class="dropdown-menu">
-                  <a class="dropdown-item" href="/authorize/signout">Sign Out</a>
-              </div>
-            </li>
-          {{else}}
-            <li class="nav-item">
-              <a class="nav-link" href="{{signInUrl}}">Sign In</a>
-            </li>
-          {{/if}}
-        </ul>
-      </div>
-    </nav>
 
-    <!-- Main body -->
-    <main role="main" class="container">
-      {{{body}}}
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+  <title>{{title}}</title>
+  <!-- Bootstrap core CSS -->
+  <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/css/bootstrap.min.css"
+    integrity="sha384-Gn5384xqQ1aoWXA+058RXPxPg6fy4IWvTNh0E263XmFcJlSAwiGgFAW/dAiS6JXm" crossorigin="anonymous">
+  <link rel='stylesheet' href='/stylesheets/style.css' />
+  <link rel='stylesheet' href='/stylesheets/classic.css' />
+  <link rel='stylesheet' href='/stylesheets/classic.date.css' />
+  <link rel='stylesheet' href='/stylesheets/classic.time.css' />
+  <link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.5.0/css/all.css"
+    integrity="sha384-B4dIYHKNBt8Bc12p+WXckhzcICo0wtJAoU8YZTY5qE0Id1GSseTk6S+L3BlXeVIU" crossorigin="anonymous">
+</head>
 
-      <!-- Debug output -->
-      {{#if debug}}
-        <div>
+<body>
+  <!-- Nav bar -->
+
+
+  <nav class="navbar navbar-expand-lg navbar-black">
+    <div class="container-fluid">
+      <div class="navbar-wrapper">
+        <div class="navbar-toggle d-inline">
+          <button type="button" class="navbar-toggler">
+            <span class="navbar-toggler-bar bar1"></span>
+            <span class="navbar-toggler-bar bar2"></span>
+            <span class="navbar-toggler-bar bar3"></span>
+          </button>
         </div>
-      {{else}}
-      <div class="card">
-          <div class="card-body">
-            <h5 class="card-title">Debug</h5>
-            <pre class="bg-light border p-3"><code>{{debug}}</code></pre>
-          </div>
-      </div>  
-      {{/if}}
-    </main>
-
-    <footer class="page-footer font-small blue card-footer">
-      <!-- Copyright -->
-      <div class="footer-copyright text-center py-3">© 2020 Fonticons, Inc. from:
-        <a href="https://fontawesome.com/" title="Fonticons.">https://fontawesome.com/</a>
+        <a class="navbar-brand" href="javascript:void(0)">Rentsy</a>
       </div>
-      <!-- Copyright -->      
-    </footer>
+      <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navigation"
+        aria-expanded="false" aria-label="Toggle navigation">
+        <span class="navbar-toggler-bar navbar-kebab"></span>
+        <span class="navbar-toggler-bar navbar-kebab"></span>
+        <span class="navbar-toggler-bar navbar-kebab"></span>
+      </button>
+      <div class="collapse navbar-collapse" id="navigation">
+        <ul class="navbar-nav ml-auto">
+          {{#if userName}}
+          <li class="nav-item">
+            <a href="javascript:void(0)" class="nav-link" data-toggle="tooltip" data-placement="bottom"
+              aria-expanded="false" title="Arrendar un objeto">
+              <i class="fa fa-plus"></i>
+              <p class="d-lg-none">
+                Arrendar algo
+              </p>
+            </a>
+          </li>
+          <li class="dropdown nav-item">
+            <a href="javascript:void(0)" class="dropdown-toggle nav-link" data-toggle="dropdown" data-placement="bottom"
+              title="Notificaciones">
+              <div class="notification d-none d-lg-block d-xl-block"></div>
+              <i class="far fa-bell"></i>
+              <p class="d-lg-none">
+                Notificaciones
+              </p>
+            </a>
+            <ul class="dropdown-menu dropdown-menu-right dropdown-navbar">
+              <li class="nav-link"><a href="#" class="nav-item dropdown-item">Mike John responded to your email</a></li>
+              <li class="nav-link"><a href="javascript:void(0)" class="nav-item dropdown-item">You have 5 more tasks</a>
+              </li>
+              <li class="nav-link"><a href="javascript:void(0)" class="nav-item dropdown-item">Your friend Michael is in
+                  town</a></li>
+              <li class="nav-link"><a href="javascript:void(0)" class="nav-item dropdown-item">Another notification</a>
+              </li>
+              <li class="nav-link"><a href="javascript:void(0)" class="nav-item dropdown-item">Another one</a></li>
+            </ul>
+          </li>
+          {{/if}}
+          <li class="dropdown nav-item">
+            <a href="#" class="dropdown-toggle nav-link" data-toggle="dropdown" aria-expanded="false">
+              <div class="photo">
+                <i class="far fa-user" id="foto-alternativa"></i>
+                <img id="foto-de-perfil">
+              </div>
+              <b class="caret d-none d-lg-block d-xl-block"></b>
+              <p class="d-lg-none">
+                Mi perfil
+              </p>
+            </a>
+            <ul class="dropdown-menu dropdown-navbar">
 
-    <!-- Bootstrap core JavaScript
+              {{#if userName}}
+              <li class="nav-link"><a href="javascript:void(0)" class="nav-item dropdown-item">Mi perfil</a></li>
+              <li class="dropdown-divider"></li>
+              <li class="nav-link"><a href="/authorize/signout" class="nav-item dropdown-item">Cerrar sesión</a></li>
+              {{else}}
+              <li class="nav-link"><a href="{{signInUrl}}" class="nav-item dropdown-item">Iniciar sesión</a></li>
+              {{/if}}
+            </ul>
+          </li>
+          <li class="separator d-lg-none"></li>
+        </ul>
+      </div>
+    </div>
+  </nav>
+
+  <!-- Main body -->
+  <main role="main" class="">
+    {{{body}}}
+
+  </main>
+
+
+  <!-- Bootstrap core JavaScript
     ================================================== -->
-    <script src="https://code.jquery.com/jquery-3.4.1.min.js" integrity="sha256-CSXorXvZcTkaix6Yvo6HppcZGetbYMGWSFlBw8HfCJo=" crossorigin="anonymous"></script>
-    <script src="https://code.jquery.com/ui/1.12.1/jquery-ui.min.js" integrity="sha256-VazP97ZCwtekAsvgPBSUwPFKdrwD3unUfSGVYrahUqU=" crossorigin="anonymous"></script>
-    <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.12.9/umd/popper.min.js" integrity="sha384-ApNbgh9B+Y1QKtv3Rn7W3mgPxhU9K/ScQsAP7hUibX39j7fakFPskvXusvfa0b4Q" crossorigin="anonymous"></script>
-    <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/js/bootstrap.min.js" integrity="sha384-JZR6Spejh4U02d8jOt6vLEHfe/JQGiRRSQQxSfFWpi1MquVdAyjUar5+76PVCmYl" crossorigin="anonymous"></script>
-    <script src="/javascripts/index.js"></script>
-  </body>
+  <script src="https://code.jquery.com/jquery-3.2.1.slim.min.js"
+    integrity="sha384-KJ3o2DKtIkvYIK3UENzmM7KCkRr/rE9/Qpg6aAZGJwFDMVNA/GpGFF93hXpG5KkN" crossorigin="anonymous">
+  </script>
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.12.9/umd/popper.min.js"
+    integrity="sha384-ApNbgh9B+Y1QKtv3Rn7W3mgPxhU9K/ScQsAP7hUibX39j7fakFPskvXusvfa0b4Q" crossorigin="anonymous">
+  </script>
+  <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/js/bootstrap.min.js"
+    integrity="sha384-JZR6Spejh4U02d8jOt6vLEHfe/JQGiRRSQQxSfFWpi1MquVdAyjUar5+76PVCmYl" crossorigin="anonymous">
+  </script>
+  <!-- Boostrap Datepicker--->
+  <script src="https://cdn.jsdelivr.net/npm/litepicker/dist/js/main.js"></script>
+  <script>
+    const user = {
+      name: "{{userName}}",
+      email: "{{userEmail}}",
+      accessToken: "{{accessToken}}"
+    };
+  </script>
+  <script src="/javascripts/lib/picker.js"></script>
+  <script src="/javascripts/lib/picker.time.js"></script>
+  <script src="https://cdn.jsdelivr.net/gh/gitbrent/bootstrap4-toggle@3.6.1/js/bootstrap4-toggle.min.js"></script>
+  <script src="/javascripts/lib/jquery-weekdays.js"></script>
+  <script src="/javascripts/index.js"></script>
+
+</body>
+
 </html>
