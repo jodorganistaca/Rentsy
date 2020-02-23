@@ -21,4 +21,8 @@ router.get("/", async function(req, res, next) {
 	res.render("index", parms);
 });
 
+router.get('/schedule', function(req, res, next) {
+  //res.send('Schedule Test');
+  res.render('schedule');
+});
 module.exports = router;
