@@ -1,9 +1,94 @@
-<div class="jumbotron">
-  <h1>Node Graph Tutorial</h1>
-  <p class="lead">This sample app shows how to use the Microsoft Graph API to access Outlook data from Node.js</p>
-  {{#if user}}
-    <p>Welcome {{user}}!</p>
-  {{else}}
-    <a class="btn btn-primary btn-large" href="{{signInUrl}}">Click here to login</a>
-  {{/if}}
+<link rel="stylesheet" href="/stylesheets/index.css">
+<link href="https://cdn.jsdelivr.net/gh/gitbrent/bootstrap4-toggle@3.6.1/css/bootstrap4-toggle.min.css"
+  rel="stylesheet">
+<link href="/stylesheets/jquery-weekdays.css" rel="stylesheet">
+<div class="col-md-12">
+
+  <body>
+    <div id="fondoVideo">
+      <video id="bg-video" autoplay="true" loop="loop" preload="metadata" muted="muted">
+        <source src="/Assets/videos/background_video.webm" type="video/webm" />
+      </video>
+    </div>
+
+
+    <div id="booking" class="section">
+      <div class="section-center">
+        <div class="container">
+          <div class="row">
+            <div class="col-md-7 col-md-push-5">
+              <div class="booking-cta">
+                <h1>RENTSY</h1>
+                <p>Lorem ipsum dolor sit amet consectetur adipisicing elit. Animi facere, soluta magnam consectetur
+                  molestias itaque
+                  ad sint fugit architecto incidunt iste culpa perspiciatis possimus voluptates aliquid consequuntur
+                  cumque quasi.
+                  Perspiciatis.
+                </p>
+              </div>
+            </div>
+            <div class="col-md-5 col-md-pull-7">
+              <div class="booking-form">
+                {{#if userName}}
+                <form onsubmit="validar();">
+                  <div class="form-group">
+                    <span class="form-label">Qué necesitas</span>
+                    <input class="form-control" type="text" placeholder="Escribe qué objeto deseas arrendar"
+                      required="true">
+                  </div>
+                  <div class="form-group">
+                    <span class="form-label">Cuándo lo necesitas</span>
+                    <input id="litepicker" class="form-control" placeholder="Selecciona el rango de fechas"
+                      required="true" readonly="true">
+                  </div>
+                  <div class="form-group">
+                    <input type="checkbox" id="esRecurrente" checked="true" data-toggle="toggle"
+                      onchange="cambiarVista();" data-onstyle="primary" data-off="Todo el día" data-on="En intervalos"
+                      data-offstyle="secondary">
+                  </div>
+                  <div class="row" id="divHoras">
+                    <div class="col-sm-6">
+                      <div class="form-group">
+                        <span class="form-label">Hora inicial</span>
+                        <input id="horaInicial" name=""
+                          class="form-control fieldset__input js__timepicker picker__input" type="text"
+                          placeholder="Hora inicial" readonly="true" required="true" aria-haspopup="true">
+                      </div>
+                    </div>
+                    <div class="col-sm-6">
+                      <div class="form-group">
+                        <span class="form-label">Hora final</span>
+                        <input id="horaFinal" class="form-control fieldset__input js__timepicker picker__input"
+                          type="text" placeholder="Hora inicial" readonly="true" required="true" aria-haspopup="true">
+                      </div>
+                    </div>
+                  </div>
+                  <div class="form-group" id="divSemana">
+                    <span class="form-label">Qué días lo necesitas</span>
+                    <div id="diasSemana" type="text" required="true"></div>
+                  </div>
+                  <div class="form-btn">
+                    <button class="submit-btn" id="btn-Submit" disabled="true" type="submit">Buscar</button>
+                  </div>
+                </form>
+                {{else}}
+                <p>Esta app usa una API de Microsoft para acceder con Outlook</p>
+                <div style="width: 50%;
+  margin: 0 auto;">
+                  <a class="btn btn-primary btn-large" style="margin-left:12px;" href="{{signInUrl}}">Inicia Sesión!</a>
+                </div>
+                {{/if}}
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+    <div id="creditos">
+      <div id="creditos-texto">
+        <p style="color: white !important;">Vídeo de: <a style="color: white !important;"
+            href="https://filmpac.com/filmpac-site-demo/ref/16/">FILMPAC</a></p>
+      </div>
+    </div>
+  </body><!-- This templates was made by Colorlib (https://colorlib.com) -->
 </div>
