@@ -24,9 +24,6 @@ app.use("/", indexRouter);
 app.use("/authorize", authorize);
 app.use("/users", usersRouter);
 
-app.use("/node_modules", express.static(__dirname + "/node_modules"));
-
-app.use("/js", express.static(__dirname + "/js"));
 // catch 404 and forward to error handler
 app.use(function(req, res, next) {
   next(createError(404));
