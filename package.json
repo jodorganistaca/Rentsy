@@ -7,7 +7,6 @@
     "precommit": "lint-staged"
   },
   "dependencies": {
-    "@fullcalendar/timegrid": "^4.4.0",
     "cookie-parser": "~1.4.4",
     "debug": "~2.6.9",
     "dotenv": "^8.2.0",
