@@ -5,7 +5,10 @@ module.exports = {
 		"node": true,
 		"jquery": true
 	},
-	"extends": "eslint:recommended",
+	"extends": [
+		"eslint:recommended",
+		"prettier",
+	],
 	"globals": {
 		"Atomics": "readonly",
 		"SharedArrayBuffer": "readonly"
