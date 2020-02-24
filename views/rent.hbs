@@ -1,0 +1,16 @@
+ <table class="table table-striped">
+        <thead>
+        <tr>
+            <th>Start</th>
+            <th>End</th>
+            <th>Title</th>
+        </tr>
+        </thead>
+        {{#each objects}}
+          <tr>
+            <td>{{this.start}}</td> 
+            <td>{{this.end}}</td>
+            <td>{{this.title}}</td>
+          </tr>          
+       {{/each}}   
+      </table>
