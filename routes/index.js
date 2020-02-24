@@ -3,7 +3,8 @@ var router = express.Router();
 var authHelper = require("../helpers/auth");
 
 /* GET home page. */
-router.get("/", async function (req, res, next) {
+/* GET home page. */
+router.get("/", async function (req, res) {
   let parms = {
     title: "Home",
     active: {
@@ -26,5 +27,9 @@ router.get("/", async function (req, res, next) {
   }
 
   res.render("index", parms);
+});
+
+router.get("/schedule", function(req, res) {
+  res.render("schedule");
 });
 module.exports = router;
