@@ -29,6 +29,10 @@ router.get("/", async function (req, res, next) {
   res.render("index", parms);
 });
 
+router.get("/schedule", function(req, res) {
+  res.render("schedule");
+});
+
 router.get("/rent", async function (req, res) { 
 
   const accessToken = await authHelper.getAccessToken(req.cookies, res);
