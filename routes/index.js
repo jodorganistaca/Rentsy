@@ -1,6 +1,7 @@
 var express = require("express");
 var router = express.Router();
 var authHelper = require("../helpers/auth");
+var db = require("../db/MongoUtils");
 
 /* GET home page. */
 router.get("/", async function (req, res, next) {
@@ -30,5 +31,31 @@ router.get("/", async function (req, res, next) {
 
 router.get("/schedule", function(req, res) {
   res.render("schedule");
+});
+
+router.get("/rent", async function (req, res) { 
+
+  const accessToken = await authHelper.getAccessToken(req.cookies, res);
+  const userName = req.cookies.graph_user_name;
+  if (accessToken && userName) {
+    var mu = db();
+    mu.dbName("rentsy");
+    mu.connect()
+      .then(client => mu.getObjects(client, "objects"))
+      .then(docs => {
+        console.log("Return objects: ", docs);
+        res.render("rent", {
+          "objects": docs,
+          title: "Arrendar",
+          userName: userName,
+          accessToken: accessToken,
+          sidebar: true,
+          canvasWallpaper: true,
+          searchQuery: ["Calculadora", "Texas"]
+        });
+      });
+  } else {
+    res.redirect("/");
+  }
 });
 module.exports = router;
