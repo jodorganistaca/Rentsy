@@ -57,11 +57,29 @@
         <ul class="navbar-nav ml-auto">
           {{#if userName}}
           <li class="nav-item">
-            <a href="javascript:void(0)" class="nav-link" data-toggle="tooltip" data-placement="bottom"
+            <a href="#" onclick="redirectBusqueda();" class="nav-link" data-toggle="tooltip" data-placement="bottom"
+              aria-expanded="false" title="Buscar un objeto">
+              <i class="fa fa-search"></i>
+              <p class="d-lg-none">
+                Buscar algo
+              </p>
+            </a>
+          </li>
+          <li class="nav-item">
+            <a href="#" onclick="redirectPublicar(); return false;" class="nav-link" data-toggle="tooltip" data-placement="bottom"
               aria-expanded="false" title="Arrendar un objeto">
               <i class="fa fa-plus"></i>
               <p class="d-lg-none">
                 Arrendar algo
+              </p>
+            </a>
+          </li>
+          <li class="nav-item">
+            <a  href="#" onclick="redirectSchedule();" class="nav-link" data-toggle="tooltip" data-placement="bottom"
+              aria-expanded="false" title="Mi calendario">
+              <i class="fas fa-clock"></i>
+              <p class="d-lg-none">
+                Mi calendario
               </p>
             </a>
           </li>
@@ -87,12 +105,12 @@
           </li>
           {{/if}}
           <li class="dropdown nav-item">
-            <a href="#" class="dropdown-toggle nav-link" data-toggle="dropdown" aria-expanded="false">
+            <a href="#" class="dropdown-toggle nav-link" data-toggle="dropdown" data-placement="bottom" title="Mi perfil">
               <div class="photo">
                 <i class="far fa-user" id="foto-alternativa"></i>
                 <img id="foto-de-perfil">
               </div>
-              <b class="caret d-none d-lg-block d-xl-block"></b>
+              <div class="caret d-none d-lg-block d-xl-block"></div>
               <p class="d-lg-none">
                 Mi perfil
               </p>
@@ -100,8 +118,6 @@
             <ul class="dropdown-menu dropdown-navbar">
 
               {{#if userName}}
-              <li class="nav-link"><a href="javascript:void(0)" class="nav-item dropdown-item">Mi perfil</a></li>
-              <li class="dropdown-divider"></li>
               <li class="nav-link"><a href="/authorize/signout" class="nav-item dropdown-item">Cerrar sesión</a></li>
               {{else}}
               <li class="nav-link"><a href="{{signInUrl}}" class="nav-item dropdown-item">Iniciar sesión</a></li>
@@ -116,7 +132,12 @@
 
   <!-- Main body -->
   <main role="main" class="">
+
+
     {{{body}}}
+   
+    <!-- body-row END -->
+
 
   </main>
 
