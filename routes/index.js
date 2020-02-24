@@ -29,7 +29,7 @@ router.get("/", async function (req, res, next) {
   res.render("index", parms);
 });
 
-router.get("/rent", async function (req, res) {
+router.get("/rent", async function (req, res) { 
 
   const accessToken = await authHelper.getAccessToken(req.cookies, res);
   const userName = req.cookies.graph_user_name;
@@ -41,7 +41,13 @@ router.get("/rent", async function (req, res) {
       .then(docs => {
         console.log("Return objects: ", docs);
         res.render("rent", {
-          "objects": docs
+          "objects": docs,
+          title: "Arrendar",
+          userName: userName,
+          accessToken: accessToken,
+          sidebar: true,
+          canvasWallpaper: true,
+          searchQuery: ["Calculadora", "Texas"]
         });
       });
   } else {

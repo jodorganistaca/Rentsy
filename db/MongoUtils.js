@@ -77,21 +77,30 @@ function MongoUtils() {
 const mu = MongoUtils();
 
 var objetoPrueba = {
-  start: new Date(),
-  end: new Date(),
-  /* https://fullcalendar.io/docs/recurring-events 
-  duration: */
-  title: "Calculadora",
-  estado: "Arrendado",
+
+  name: "Calculadora Texas",
+  description: "Arriendo calculadora texas",
+  priceHour: "$2000/hora",
+  priceDay: "$5000/día",
+  arrendador: {
+    userName: "Juan Sebastián Bravo",
+    email: "js.bravo@uniandes.edu.co"},
   usuariosInteresados: ["js.bravo@uniandes.edu.co"],
-  usuarioArrendatario: "js.bravo@uniandes.edu.co",
-  esRecurrente: true,
-  daysOfWeek:[0,1,2,3,4],
-  startRecur: new Date(),
-  endRecur: new Date(),
-  /* hh:mm:sss */
-  startTime: "09:20",
-  endTime: "09:20"
+  events:[{
+    start: new Date(),
+    end: new Date(),
+    /* https://fullcalendar.io/docs/recurring-events 
+  duration: */
+    title: "Calculadora",
+    state: "Arrendado",
+    usuarioArrendatario: "js.bravo@uniandes.edu.co",
+    esRecurrente: true,
+    daysOfWeek:[0,1,2,3,4],
+    startRecur: new Date(),
+    endRecur: new Date(),
+    /* hh:mm:sss */
+    startTime: "09:20",
+    endTime: "09:20"}]
 
 
 };
@@ -101,7 +110,13 @@ var idCollectionInit =     {
   "sequence_value": 0
 };
 
-/* mu.connect()
+/*
+mu.connect()
+  .then(client => mu.dropCollection(client, "objects"))
+  .catch((err) => console.log(err));
+
+
+ mu.connect()
   .then(client => mu.dropCollection(client, "idCollection"))
   .catch((err) => console.log(err));
 

@@ -19,6 +19,7 @@
     "litepicker": "^1.0.29",
     "mongodb": "^3.5.3",
     "morgan": "~1.9.1",
+    "multer": "^1.4.2",
     "simple-oauth2": "^3.3.0"
   },
   "description": "plataforma web para arrendar objetos dentro de la Universidad",
