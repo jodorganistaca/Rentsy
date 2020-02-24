@@ -728,8 +728,15 @@ fieldset[disabled] .navbar .navbar-nav>a.btn.active {
 }
 
 .btn-primary {
-  background: rgb(71, 212, 37);
-  background: linear-gradient(90deg, rgba(71, 212, 37, 1) 0%, rgba(74, 194, 12, 1) 47%, rgba(22, 205, 105, 1) 100%);
+  background: #56ab2f;
+  /* fallback for old browsers */
+  background: -webkit-linear-gradient(to right, #a8e063, #56ab2f);
+  /* Chrome 10-25, Safari 5.1-6 */
+  background: linear-gradient(to right, #a8e063, #56ab2f);
+  /* W3C, IE 10+/ Edge, Firefox 16+, Chrome 26+, Opera 12+, Safari 7+ */
+
+
+
   color: #ffffff;
 }
 
@@ -2423,7 +2430,7 @@ fieldset[disabled] .btn-link.active {
 }
 
 .navbar-nav li {
-  padding: 0 10px;
+  padding: 0 6px;
 }
 
 .navbar-nav li a {
