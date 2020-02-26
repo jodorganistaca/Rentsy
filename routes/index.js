@@ -79,7 +79,7 @@ router.get("/add", async function(req, res) {
   
 });
 
-router.post("/",function(req,res){
+router.post("/addObject",function(req,res){
   if(req.files){
     var file = req.files.filename,
       filename = file.name;
@@ -88,7 +88,40 @@ router.post("/",function(req,res){
         console.log(err);
         res.send("error in upload file");
       }else{
-        res.send("done");
+        console.log("request bodyyyy!!",req);
+        var objetoPrueba = {
+          name: req.body.name,
+          description: req.body.description,
+          priceHour: req.body.priceHour,
+          priceDay: req.body.priceDay,
+          arrendador: {
+            userName: "Juan Sebastián Bravo",
+            email: "js.bravo@uniandes.edu.co"},
+          usuariosInteresados: ["js.bravo@uniandes.edu.co"],
+          events:[{
+            start: new Date(),
+            end: new Date(),
+            /* https://fullcalendar.io/docs/recurring-events 
+          duration: */
+            title: "Calculadora",
+            state: "Arrendado",
+            usuarioArrendatario: "js.bravo@uniandes.edu.co",
+            esRecurrente: true,
+            daysOfWeek:[0,1,2,3,4],
+            startRecur: new Date(),
+            endRecur: new Date(),
+            /* hh:mm:sss */
+            startTime: "09:20",
+            endTime: "09:20"}]
+        };
+        var mu = db();
+        mu.dbName("rentsy");
+        mu.connect()
+          .then(client => mu.insertOneObject(objetoPrueba,client, "objects"))
+          .then(docs => {
+            console.log("Return objects: ", docs);
+            res.send("done");
+          });        
       }
     });
     console.log(filename);
@@ -98,13 +131,14 @@ router.post("/",function(req,res){
 
 router.post("/rent", async function(req,res){
   console.log("request bodyyyy!!",req);
+  console.log("nameeee: ", req.body.objeto);
   const accessToken = await authHelper.getAccessToken(req.cookies, res);
   const userName = req.cookies.graph_user_name;
   if (accessToken && userName) {
     var mu = db();
     mu.dbName("rentsy");
     mu.connect()
-      .then(client => mu.getObjects(client, "objects"))
+      .then(client => mu.findByName(client, "objects", req.body.objeto))
       .then(docs => {
         console.log("Return objects: ", docs);
         res.render("rent", {

@@ -20,32 +20,32 @@
                 <div class="row">
                     <div class="col-lg-12 mx-auto" style="overflow-y: scroll; height:85vh; ">
                         <div class="booking-form">
-                            <form method="post" enctype="multipart/form-data" action="/">
+                            <form method="post" enctype="multipart/form-data" action="/addObject">
                                 <div class="form-group">
                                     <span class="form-label">Nombre</span>
-                                    <input class="form-control" type="text" placeholder="Escribe qué objeto deseas poner en arriendo"
+                                    <input name="name" class="form-control" type="text" placeholder="Escribe qué objeto deseas poner en arriendo"
                                         required="true">
                                 </div>
                                 <div class="form-group">
                                     <span class="form-label">Descripción</span>
-                                    <input class="form-control" type="text"  placeholder="Escribe una descripción de tu objeto"
+                                    <input name="description" class="form-control" type="text"  placeholder="Escribe una descripción de tu objeto"
                                         required="true">
                                 </div>
                                 <div class="form-group">
                                     <span class="form-label">Precio por hora</span>
-                                    <input type="number" min="1" step="any" placeholder="A que precio lo pones por hora" required="true"/>
+                                    <input name="priceHour" type="number" min="1" step="any" placeholder="A que precio lo pones por hora" required="true"/>
                                 </div>
                                 <div class="form-group">
                                     <span class="form-label">Precio por Dia</span>
-                                    <input type="number" min="1" step="any" placeholder="A que precio lo pones por dia" required="true"/>
+                                    <input name="priceDay" type="number" min="1" step="any" placeholder="A que precio lo pones por dia" required="true"/>
                                 </div>
                                 <div class="form-group">
                                     <span class="form-label">Fecha Inicio</span>
-                                    <input type="date" placeholder="Fecha inicial" required="true"/>
+                                    <input name="dateBegin" type="date" placeholder="Fecha inicial" required="true"/>
                                 </div>
                                 <div class="form-group">
                                     <span class="form-label">Fecha Final</span>
-                                    <input id="litepicker" placeholder="Fecha final" required="true"/>
+                                    <input name="dateEnd" id="litepicker" placeholder="Fecha final" required="true"/>
                                 </div>
                                 <div class="form-group">
                                     <span class="form-label">Escoge un archivo</span>
