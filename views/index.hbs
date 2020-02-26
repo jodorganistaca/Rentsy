@@ -33,12 +33,12 @@
                 <form method="post" action="/rent" onsubmit="validar();">
                   <div class="form-group">
                     <span class="form-label">Qué necesitas</span>
-                    <input class="form-control" type="text" placeholder="Escribe qué objeto deseas arrendar"
+                    <input name="objeto" class="form-control" type="text" placeholder="Escribe qué objeto deseas arrendar"
                       required="true">
                   </div>
                   <div class="form-group">
                     <span class="form-label">Cuándo lo necesitas</span>
-                    <input id="litepicker" class="form-control" placeholder="Selecciona el rango de fechas"
+                    <input name="fecha" id="litepicker" class="form-control" placeholder="Selecciona el rango de fechas"
                       required="true" readonly="true">
                   </div>
                   <div class="form-group">
@@ -50,7 +50,7 @@
                     <div class="col-sm-6">
                       <div class="form-group">
                         <span class="form-label">Hora inicial</span>
-                        <input id="horaInicial" name=""
+                        <input name="hora-inicial" id="horaInicial" name=""
                           class="form-control fieldset__input js__timepicker picker__input" type="text"
                           placeholder="Hora inicial" readonly="true" required="true" aria-haspopup="true">
                       </div>
@@ -58,7 +58,7 @@
                     <div class="col-sm-6">
                       <div class="form-group">
                         <span class="form-label">Hora final</span>
-                        <input id="horaFinal" class="form-control fieldset__input js__timepicker picker__input"
+                        <input name="hora-final" id="horaFinal" class="form-control fieldset__input js__timepicker picker__input"
                           type="text" placeholder="Hora inicial" readonly="true" required="true" aria-haspopup="true">
                       </div>
                     </div>
