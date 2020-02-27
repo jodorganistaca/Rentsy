@@ -8,8 +8,11 @@ require("dotenv").config();
 var indexRouter = require("./routes/index");
 var authorize = require("./routes/authorize");
 var usersRouter = require("./routes/users");
+var upload = require("express-fileupload");
 
 var app = express();
+
+app.use(upload());
 
 // view engine setup
 app.set("views", path.join(__dirname, "views"));
