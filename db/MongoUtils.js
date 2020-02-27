@@ -43,6 +43,18 @@ function MongoUtils() {
     return objects.find({}).toArray().finally(() => client.close());
   }; 
 
+  mu.findByName = (client, collectionName, name) => {
+    if (!client || !collectionName)
+    {
+      console.error("ERROR: Empty arguments! at: MongoUtils -> mu.getObjects(" + client + "," + collectionName +")");
+      return;
+    }
+    const objects = client.db(dbName).collection(collectionName);
+
+    console.log("Querying objects by name");
+    return objects.find({ $text: { $search: name } }).toArray().finally(() => client.close());
+  }; 
+
   mu.insertOneObject = (object, client, collectionName) => {
     if (!client || !client.db || !object || !collectionName)
     { 
@@ -50,6 +62,7 @@ function MongoUtils() {
       return;
     }
     const objects = client.db(dbName).collection(collectionName);
+    objects.createIndex( { name: "text" } );
     return objects.insertOne(object, (err, result) => {
       if(err){
         console.log(err);
@@ -69,6 +82,15 @@ function MongoUtils() {
     });
   };
 
+  mu.findByOwner = (client, collectionName, Name) => {
+    const object = client.db(dbName).collection(collectionName);
+    return object.find({ arrendador: {userName: Name} }).toArray().finally(() => client.close());
+  };
+
+  mu.findByEmailOwner = (client, collectionName, Email) => {
+    const object = client.db(dbName).collection(collectionName);
+    return object.find({ arrendador: {email: Email} }).toArray().finally(() => client.close());
+  };
 
   return mu;
 }
@@ -116,7 +138,7 @@ mu.connect()
   .catch((err) => console.log(err));
 
 
- mu.connect()
+mu.connect()
   .then(client => mu.dropCollection(client, "idCollection"))
   .catch((err) => console.log(err));
 
@@ -124,25 +146,15 @@ mu.connect()
   .then(client => mu.dropCollection(client, "objects"))
   .catch((err) => console.log(err)); */
 
+/*
 mu.connect()
   .then(client => mu.getObjects(client, "idCollection"))
   .then(docs => {
     console.log("Return idCollection collection: ", docs);
   })
-  .catch((err) => console.log(err));
+  .catch((err) => console.log(err));*/
 
-mu.connect()
-  .then(client => mu.getObjects(client, "idCollection"))
-  .then(docs => {
-    console.log("Return idCollection collection: ", docs);
-  })
-  .catch((err) => console.log(err));
-
-mu.connect()
-  .then((client) => mu.insertOneObject(idCollectionInit, client, "idCollection"))
-  .catch((err) => console.log(err));
-
-
+/*
 mu.connect()
   .then((client) => mu.insertOneObject(objetoPrueba, client, "objects"))
   .catch((err) => console.log(err));
@@ -152,7 +164,7 @@ mu.connect()
   .then(docs => {
     console.log("Return objects: ", docs);
   })
-  .catch((err) => console.log(err));
+  .catch((err) => console.log(err));*/
 
 
 module.exports = MongoUtils;
