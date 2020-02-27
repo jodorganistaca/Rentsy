@@ -82,6 +82,15 @@ function MongoUtils() {
     });
   };
 
+  mu.findByOwner = (client, collectionName, Name) => {
+    const object = client.db(dbName).collection(collectionName);
+    return object.find({ arrendador: {userName: Name} }).toArray().finally(() => client.close());
+  };
+
+  mu.findByEmailOwner = (client, collectionName, Email) => {
+    const object = client.db(dbName).collection(collectionName);
+    return object.find({ arrendador: {email: Email} }).toArray().finally(() => client.close());
+  };
 
   return mu;
 }
