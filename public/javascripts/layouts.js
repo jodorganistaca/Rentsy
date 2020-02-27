@@ -1,6 +1,7 @@
 var Canvas = document.getElementById("canvas");
 var ctx = Canvas.getContext("2d");
 
+  
 var resize = function() {
     Canvas.width = Canvas.clientWidth;
     Canvas.height = Canvas.clientHeight;
