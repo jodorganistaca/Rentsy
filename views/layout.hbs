@@ -5,156 +5,135 @@
   <meta charset="utf-8">
   <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
   <title>{{title}}</title>
-  <!-- Bootstrap core CSS -->
-  <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/css/bootstrap.min.css"
-    integrity="sha384-Gn5384xqQ1aoWXA+058RXPxPg6fy4IWvTNh0E263XmFcJlSAwiGgFAW/dAiS6JXm" crossorigin="anonymous">
-  <link rel='stylesheet' href='/stylesheets/style.css' />
-  <link rel='stylesheet' href='/stylesheets/classic.css' />
-  <link rel='stylesheet' href='/stylesheets/classic.date.css' />
-  <link rel='stylesheet' href='/stylesheets/classic.time.css' />
-  <link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.5.0/css/all.css"
-    integrity="sha384-B4dIYHKNBt8Bc12p+WXckhzcICo0wtJAoU8YZTY5qE0Id1GSseTk6S+L3BlXeVIU" crossorigin="anonymous">
-    <!-- FullCalendar core CSS -->
-    <link href='https://cdnjs.cloudflare.com/ajax/libs/fullcalendar/4.2.0/bootstrap/main.min.css' rel='stylesheet' />
-    <link href='https://cdnjs.cloudflare.com/ajax/libs/fullcalendar/4.2.0/core/main.min.css' rel='stylesheet' />
-    <link href='https://cdnjs.cloudflare.com/ajax/libs/fullcalendar/4.2.0/daygrid/main.min.css' rel='stylesheet' />
-    <link href='https://cdnjs.cloudflare.com/ajax/libs/fullcalendar/4.2.0/list/main.min.css' rel='stylesheet' />
-    <link href="https://cdnjs.cloudflare.com/ajax/libs/fullcalendar/4.2.0/timegrid/main.min.css" rel="stylesheet" />
-    <!-- FullCalendar core JS -->
-    <script src='https://cdnjs.cloudflare.com/ajax/libs/fullcalendar/4.2.0/bootstrap/main.min.js'></script>
-    <script src='https://cdnjs.cloudflare.com/ajax/libs/fullcalendar/4.2.0/core/locales-all.min.js'></script>
-    <script src='https://cdnjs.cloudflare.com/ajax/libs/fullcalendar/4.2.0/core/main.min.js'></script>
-    <script src="https://cdnjs.cloudflare.com/ajax/libs/fullcalendar/4.2.0/daygrid/main.min.js"></script>
-    <script src="https://cdnjs.cloudflare.com/ajax/libs/fullcalendar/4.2.0/timegrid/main.min.js"></script>
-    <script src="https://cdnjs.cloudflare.com/ajax/libs/fullcalendar/4.2.0/list/main.min.js"></script>
-    <script src="https://unpkg.com/sweetalert/dist/sweetalert.min.js"></script>
-    <script type="text/javascript" src="http://ajax.googleapis.com/ajax/libs/jquery/1.5/jquery.min.js"></script>
+  {{! Material Icons}}
+  <link rel="stylesheet" type="text/css"
+    href="https://fonts.googleapis.com/css?family=Roboto:300,400,500,700|Roboto+Slab:400,700|Material+Icons" />
+  {{! Bootstrap Material}}
+  <link rel="stylesheet"
+    href="https://unpkg.com/bootstrap-material-design@4.1.1/dist/css/bootstrap-material-design.min.css"
+    integrity="sha384-wXznGJNEXNG1NFsbm0ugrLFMQPWswR3lds2VeinahP8N0zJw9VWSopbjv2x7WCvX" crossorigin="anonymous">
+  {{! Main styles}}
+  <link rel="stylesheet" href="/stylesheets/core/material-icons.css">
+  {{! Bootstrap Core: JQuery & Popper & Bootstrap}}
+  <script src="https://code.jquery.com/jquery-3.2.1.slim.min.js"
+    integrity="sha384-KJ3o2DKtIkvYIK3UENzmM7KCkRr/rE9/Qpg6aAZGJwFDMVNA/GpGFF93hXpG5KkN" crossorigin="anonymous">
+  </script>
+  <script src="https://unpkg.com/popper.js@1.12.6/dist/umd/popper.js"
+    integrity="sha384-fA23ZRQ3G/J53mElWqVJEGJzU0sTs+SvzG8fXVWP+kJQ1lwFAOkcUOysnlKJC33U" crossorigin="anonymous">
+  </script>
+  {{! Bootstrap Material Design}}
+  <script src="https://unpkg.com/bootstrap-material-design@4.1.1/dist/js/bootstrap-material-design.js"
+    integrity="sha384-CauSuKpEqAFajSpkdjv3z9t8E7RlpJ1UP0lKM/+NdtSarroVKu069AlsRPKkFBz9" crossorigin="anonymous">
+  </script>
 </head>
 
 <body>
-  <!-- Nav bar -->
 
 
-  <nav class="navbar navbar-expand-lg navbar-black">
-    <div class="container-fluid">
-      <div class="navbar-wrapper">
-        <div class="navbar-toggle d-inline">
-          <button type="button" class="navbar-toggler">
-            <span class="navbar-toggler-bar bar1"></span>
-            <span class="navbar-toggler-bar bar2"></span>
-            <span class="navbar-toggler-bar bar3"></span>
-          </button>
-        </div>
-        <a class="navbar-brand" href="javascript:void(0)">Rentsy</a>
-      </div>
-      <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navigation"
-        aria-expanded="false" aria-label="Toggle navigation">
-        <span class="navbar-toggler-bar navbar-kebab"></span>
-        <span class="navbar-toggler-bar navbar-kebab"></span>
-        <span class="navbar-toggler-bar navbar-kebab"></span>
-      </button>
-      <div class="collapse navbar-collapse" id="navigation">
-        <ul class="navbar-nav ml-auto">
-          {{#if userName}}
-          <li class="nav-item">
-            <a href="#" onclick="redirectBusqueda();" class="nav-link" data-toggle="tooltip" data-placement="bottom"
-              aria-expanded="false" title="Buscar un objeto">
-              <i class="fa fa-search"></i>
-              <p class="d-lg-none">
-                Buscar algo
-              </p>
-            </a>
-          </li>
-          <li class="nav-item">
-            <a href="#" onclick="redirectPublicar(); return false;" class="nav-link" data-toggle="tooltip" data-placement="bottom"
-              aria-expanded="false" title="Arrendar un objeto">
-              <i class="fa fa-plus"></i>
-              <p class="d-lg-none">
-                Arrendar algo
-              </p>
-            </a>
-          </li>
-          <li class="nav-item">
-            <a  href="#" onclick="redirectSchedule();" class="nav-link" data-toggle="tooltip" data-placement="bottom"
-              aria-expanded="false" title="Mi calendario">
-              <i class="fas fa-clock"></i>
-              <p class="d-lg-none">
-                Mi calendario
-              </p>
-            </a>
-          </li>
-          <li class="dropdown nav-item">
-            <a href="javascript:void(0)" class="dropdown-toggle nav-link" data-toggle="dropdown" data-placement="bottom"
-              title="Notificaciones">
-              <div class="notification d-none d-lg-block d-xl-block"></div>
-              <i class="far fa-bell"></i>
-              <p class="d-lg-none">
-                Notificaciones
-              </p>
-            </a>
-            <ul class="dropdown-menu dropdown-menu-right dropdown-navbar">
-              <li class="nav-link"><a href="#" class="nav-item dropdown-item">Mike John responded to your email</a></li>
-              <li class="nav-link"><a href="javascript:void(0)" class="nav-item dropdown-item">You have 5 more tasks</a>
-              </li>
-              <li class="nav-link"><a href="javascript:void(0)" class="nav-item dropdown-item">Your friend Michael is in
-                  town</a></li>
-              <li class="nav-link"><a href="javascript:void(0)" class="nav-item dropdown-item">Another notification</a>
-              </li>
-              <li class="nav-link"><a href="javascript:void(0)" class="nav-item dropdown-item">Another one</a></li>
-            </ul>
-          </li>
-          {{/if}}
-          <li class="dropdown nav-item">
-            <a href="#" class="dropdown-toggle nav-link" data-toggle="dropdown" data-placement="bottom" title="Mi perfil">
-              <div class="photo">
-                <i class="far fa-user" id="foto-alternativa"></i>
-                <img id="foto-de-perfil">
-              </div>
-              <div class="caret d-none d-lg-block d-xl-block"></div>
-              <p class="d-lg-none">
-                Mi perfil
-              </p>
-            </a>
-            <ul class="dropdown-menu dropdown-navbar">
-
-              {{#if userName}}
-              <li class="nav-link"><a href="/authorize/signout" class="nav-item dropdown-item">Cerrar sesión</a></li>
-              {{else}}
-              <li class="nav-link"><a href="{{signInUrl}}" class="nav-item dropdown-item">Iniciar sesión</a></li>
-              {{/if}}
-            </ul>
-          </li>
-          <li class="separator d-lg-none"></li>
-        </ul>
-      </div>
-    </div>
-  </nav>
 
   <!-- Main body -->
   <main role="main" class="">
 
 
+    {{#if sidebar}}
+    <div class="wrapper">
+      {{{body}}}
+    </div>
+    {{else}}
+    <nav class="navbar navbar-expand-lg navbar-black" style="border-radius: 0px;
+    margin-bottom: 0px; background-color: rgba(72,50,20,0.5);">
+      <div class="container-fluid">
+        <div class="navbar-wrapper">
+          <a class="navbar-brand" href="javascript:;">Rentsy</a>
+        </div>
+        <button class="navbar-toggler" type="button" data-toggle="collapse" aria-controls="navigation-index"
+          aria-expanded="false" aria-label="Toggle navigation" data-target="#navigation">
+          <span class="sr-only">Activar navegación</span>
+          <span class="navbar-toggler-icon icon-bar"></span>
+          <span class="navbar-toggler-icon icon-bar"></span>
+          <span class="navbar-toggler-icon icon-bar"></span>
+        </button>
+        <div class="collapse navbar-collapse justify-content-end" id="navigation">
+          {{#unless home}}
+          <form class="navbar-form">
+            <div class="input-group no-border">
+              <input type="text" value="" class="form-control" placeholder="Busca un objeto">
+              <button type="submit" class="btn btn-white btn-round btn-just-icon">
+                <i class="material-icons">search</i>
+                <div class="ripple-container"></div>
+              </button>
+            </div>
+          </form>
+          {{/unless}}
+          <ul class="navbar-nav">
+            {{#if userName}}
+            <li class="nav-item">
+              <a class="nav-link" href="/add-object" class="nav-link"
+                data-toggle="tooltip" data-placement="bottom" aria-expanded="false" title="Arrendar un objeto">
+                <i class="material-icons">add</i>
+                <p class="d-lg-none d-md-block">
+                  Arrendar
+                </p>
+              </a>
+            </li>
+            <li class="nav-item">
+              <a href="/schedule" class="nav-link" data-toggle="tooltip" data-placement="bottom"
+                aria-expanded="false" title="Mi calendario">
+                <i class="material-icons">date_range</i>
+                <p class="d-lg-none d-md-block">
+                  Mi Calendario
+                </p>
+              </a>
+            </li>
+            {{/if}}
+            <li class="nav-item dropdown">
+              <a class="nav-link" href="javascript:;" id="navbarDropdownProfile" data-toggle="dropdown"
+                aria-haspopup="true" aria-expanded="false">
+                <div class="photo">
+                  <i class="material-icons" id="foto-alternativa">person</i>
+                  <img id="foto-de-perfil">
+                </div>
+
+                <p class="d-lg-none d-md-block">
+                  Mi cuenta
+                </p>
+              </a>
+              <div class="dropdown-menu dropdown-menu-right" aria-labelledby="navbarDropdownProfile">
+                {{#if userName}}
+                <a href="/authorize/signout" class="dropdown-item">Cerrar sesión</a>
+                {{else}}
+                <a href="{{signInUrl}}" class="dropdown-item">Iniciar sesión</a>
+                {{/if}}
+              </div>
+            </li>
+          </ul>
+        </div>
+      </div>
+    </nav>
+
     {{{body}}}
-   
-    <!-- body-row END -->
+    {{/if}}
+
+
+
 
 
   </main>
 
+  
+  {{! Bootstrap Material Design init}}
+  <script>
+    $(document).ready(function () {
+      $('body').bootstrapMaterialDesign();
+    });
+    $(function () {
+    $("[data-toggle='tooltip']").tooltip();
+});
+  </script>
+  {{! Moment.js}}
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/moment.js/2.14.0/moment-with-locales.min.js"></script>
 
-  <!-- Bootstrap core JavaScript
-    ================================================== -->
-  <script src="https://code.jquery.com/jquery-3.2.1.slim.min.js"
-    integrity="sha384-KJ3o2DKtIkvYIK3UENzmM7KCkRr/rE9/Qpg6aAZGJwFDMVNA/GpGFF93hXpG5KkN" crossorigin="anonymous">
-  </script>
-  <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.12.9/umd/popper.min.js"
-    integrity="sha384-ApNbgh9B+Y1QKtv3Rn7W3mgPxhU9K/ScQsAP7hUibX39j7fakFPskvXusvfa0b4Q" crossorigin="anonymous">
-  </script>
-  <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/js/bootstrap.min.js"
-    integrity="sha384-JZR6Spejh4U02d8jOt6vLEHfe/JQGiRRSQQxSfFWpi1MquVdAyjUar5+76PVCmYl" crossorigin="anonymous">
-  </script>
-  <!-- Boostrap Datepicker--->
-  <script src="https://cdn.jsdelivr.net/npm/litepicker/dist/js/main.js"></script>
+  {{! Init User Recognition}}
   <script>
     const user = {
       name: "{{userName}}",
@@ -162,11 +141,10 @@
       accessToken: "{{accessToken}}"
     };
   </script>
-  <script src="/javascripts/lib/picker.js"></script>
-  <script src="/javascripts/lib/picker.time.js"></script>
-  <script src="https://cdn.jsdelivr.net/gh/gitbrent/bootstrap4-toggle@3.6.1/js/bootstrap4-toggle.min.js"></script>
-  <script src="/javascripts/lib/jquery-weekdays.js"></script>
+  {{! User scripts}}
   <script src="/javascripts/index.js"></script>
+
+
 
 </body>
 

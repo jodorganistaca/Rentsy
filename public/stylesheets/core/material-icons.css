@@ -1,0 +1,89 @@
+/*
+* === MATERIAL ICONS ===
+*/
+
+.material-icons {
+    font-family: 'Material Icons';
+    font-weight: normal;
+    font-style: normal;
+    font-size: 24px;
+    line-height: 1;
+    letter-spacing: normal;
+    text-transform: none;
+    display: inline-block;
+    white-space: nowrap;
+    word-wrap: normal;
+    direction: ltr;
+    -moz-font-feature-settings: 'liga';
+    -moz-osx-font-smoothing: grayscale;
+  }
+  
+  .btn-group-sm .btn.btn-fab .material-icons,
+  .btn-group-sm .btn.btn-fab .fa,
+  .btn.btn-fab.btn-sm .material-icons,
+  .btn-group-sm>.btn.btn-fab .material-icons,
+  .btn.btn-fab.btn-sm .fa,
+  .btn-group-sm>.btn.btn-fab .fa,
+  .btn.btn-fab.btn-fab-mini .material-icons,
+  .btn.btn-fab.btn-fab-mini .fa,
+  .btn-group-sm .btn.btn-just-icon .material-icons,
+  .btn-group-sm .btn.btn-just-icon .fa,
+  .btn.btn-just-icon.btn-sm .material-icons,
+  .btn-group-sm>.btn.btn-just-icon .material-icons,
+  .btn.btn-just-icon.btn-sm .fa,
+  .btn-group-sm>.btn.btn-just-icon .fa,
+  .btn.btn-just-icon.btn-fab-mini .material-icons,
+  .btn.btn-just-icon.btn-fab-mini .fa {
+    font-size: 17px;
+    line-height: 29px;
+  }
+  
+  .btn-group-lg .btn.btn-fab .material-icons,
+  .btn-group-lg .btn.btn-fab .fa,
+  .btn.btn-fab.btn-lg .material-icons,
+  .btn-group-lg>.btn.btn-fab .material-icons,
+  .btn.btn-fab.btn-lg .fa,
+  .btn-group-lg>.btn.btn-fab .fa,
+  .btn-group-lg .btn.btn-just-icon .material-icons,
+  .btn-group-lg .btn.btn-just-icon .fa,
+  .btn.btn-just-icon.btn-lg .material-icons,
+  .btn-group-lg>.btn.btn-just-icon .material-icons,
+  .btn.btn-just-icon.btn-lg .fa,
+  .btn-group-lg>.btn.btn-just-icon .fa {
+    font-size: 32px;
+    line-height: 56px;
+  }
+  
+  .btn.btn-fab .material-icons,
+  .btn.btn-fab .fa,
+  .btn.btn-just-icon .material-icons,
+  .btn.btn-just-icon .fa {
+    margin-top: 0;
+    position: absolute;
+    width: 100%;
+    transform: none;
+    left: 0;
+    top: 0;
+    height: 100%;
+    line-height: 41px;
+    font-size: 20px;
+  }
+  
+  .btn .material-icons,
+  .btn:not(.btn-just-icon):not(.btn-fab) .fa {
+    position: relative;
+    display: inline-block;
+    top: 0;
+    margin-top: -1em;
+    margin-bottom: -1em;
+    font-size: 1.1rem;
+    vertical-align: middle;
+  }
+
+  button:disabled,
+  button[disabled] {
+    border: 1px solid #999999 !important;
+    background-color: #cccccc !important;
+    color: #666666 !important;
+    cursor: not-allowed;
+  }

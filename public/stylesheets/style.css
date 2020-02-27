@@ -1,3 +1,6 @@
+
+
+
 pre {
   word-wrap: break-word;
   white-space: pre-wrap;
@@ -2665,4 +2668,11 @@ select,
 button,
 .pointer {
   cursor: pointer;
+}
+
+.form-control:-webkit-input-placeholder{
+  color:white;
+  letter-spacing: 1px;
+  font-family: "Helvetica Neue", Helvetica, Arial, sans-serif;
+  padding-left:50px;
 }
