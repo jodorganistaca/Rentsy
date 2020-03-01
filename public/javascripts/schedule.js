@@ -86,11 +86,14 @@ document.addEventListener("DOMContentLoaded", function () {
 
 const loadModal = (event) => 
 {
+    console.log("event", event.extendedProps);
     $(".modal-title")[0].innerHTML = event.title;
     $("#arrendador").val(event.extendedProps.arrendador);
     $("#descripcion").val(event.extendedProps.description);
-    $("#precioHora").val(event.extendedProps.precioHora);
-    $("#precioHora").val(event.extendedProps.precioDia);
+    $("#precioHora").val(event.extendedProps.priceHour);
+    $("#precioDia").val(event.extendedProps.priceDay);
+    $("#guardar").attr("formaction", "/update/"+event.extendedProps._id);
+    $("#borrar").attr("formaction", "/delete/"+event.extendedProps._id);
     if(event.extendedProps.arrendador)
     {
         $("#descripcion").attr("disabled", true);
@@ -110,105 +113,91 @@ const loadModal = (event) =>
     $(".modal").show();
 };
 
-const loadMyObject = (id) => 
+const loadObject = (id) => 
 {
     calendar.destroy();
-    //TODO: Fetch objeto por id
-    //let object = fetch
-    let object = {
-        id: 1,
-        name: "Calculadora Texas",
-        description: "Arriendo calculadora texas",
-        priceHour: "$2000/hora",
-        priceDay: "$5000/día",
-        arrendador: {
-            userName: "Juan Sebastián Bravo",
-            email: "js.bravo@uniandes.edu.co"},
-        usuariosInteresados: ["js.bravo@uniandes.edu.co"],
-        events:[{
-            start: new Date(),
-            end: new Date() +1000000,
-            /* https://fullcalendar.io/docs/recurring-events 
-        duration: */
-            title: "Calculadora",
-            state: "Arrendado",
-            usuarioArrendatario: "js.bravo@uniandes.edu.co",
-            esRecurrente: true,
-            daysOfWeek:[0,1,2,3,4],
-            startRecur: new Date(),
-            endRecur: new Date() + 200000,
-            /* hh:mm:sss */
-            //startTime: "09:20",
-            //endTime: "10:20",
-            allDay: true}]
-      
-      
-    };
-    var calendarEl = document.getElementById("calendar");
-    //dayGrid dayGridWeek dayGridMonth listWeek 
-    var view = "dayGridMonth";
+    fetch("/get/"+id)
+        .then(response => response.json())
+        .then(data => {
+            data = data[0];
+            var calendarEl = document.getElementById("calendar");
+            //dayGrid dayGridWeek dayGridMonth listWeek 
+            var view = "dayGridMonth";
+            data.events.forEach(function(part, index) {
+                data.events[index]._id =  "5e5865f875c48d1126e209b6";
+                data.events[index].name =  "Calculadora Texas";
+                data.events[index].description = "Arriendo calculadora texas";
+                data.events[index].priceHour =  "2000";
+                data.events[index].priceDay =  "5000";
+            });
+              
+            calendar = new FullCalendar.Calendar(calendarEl, {
+                buttonText: {
+                    today: "Hoy"
+                },
+                noEventsMessage: "No hay eventos este día",
+                eventLimit: true,
+                nowIndicator: true,
+                themeSystem: "bootstrap",
+                plugins: ["bootstrap", "timeGrid", "dayGrid", "list"],
+                bootstrapFontAwesome: true,
 
-    calendar = new FullCalendar.Calendar(calendarEl, {
-        buttonText: {
-            today: "Hoy"
-        },
-        noEventsMessage: "No hay eventos este día",
-        eventLimit: true,
-        nowIndicator: true,
-        themeSystem: "bootstrap",
-        plugins: ["bootstrap", "timeGrid", "dayGrid", "list"],
-        bootstrapFontAwesome: true,
+                customButtons: {
+                    day: {
+                        text: "Dia",
+                        click: function () {
+                            view = "dayGrid";
+                            calendar.changeView("dayGrid");
+                        }
+                    },
+                    week: {
+                        text: "Semana",
+                        click: function () {
+                            view = "dayGridWeek";
+                            calendar.changeView("timeGridWeek");
+                        }
+                    },
+                    month: {
+                        text: "Mes",
+                        click: function () {
+                            calendar.changeView("dayGridMonth");
+                        }
+                    },
+                    list: {
+                        text: "Lista",
+                        click: function () {
+                            calendar.changeView("listWeek");
+                        }
+                    }
 
-        customButtons: {
-            day: {
-                text: "Dia",
-                click: function () {
-                    view = "dayGrid";
-                    calendar.changeView("dayGrid");
-                }
-            },
-            week: {
-                text: "Semana",
-                click: function () {
-                    view = "dayGridWeek";
-                    calendar.changeView("timeGridWeek");
-                }
-            },
-            month: {
-                text: "Mes",
-                click: function () {
-                    calendar.changeView("dayGridMonth");
-                }
-            },
-            list: {
-                text: "Lista",
-                click: function () {
-                    calendar.changeView("listWeek");
-                }
-            }
+                },
+                header: {
+                    close: "fa-times",
+                    prev: "fa-chevron-left",
+                    next: "fa-chevron-right",
+                    prevYear: "fa-angle-double-left",
+                    nextYear: "fa-angle-double-right",
+                    left: "prev,next today",
+                    center: "title",
+                    right: "day,week,month,list"
+                },
+                defaultView: view,
+                locale: "es-ES",
+                eventClick: function(info) {
+                    console.log(info);
+                    loadModal(info.event);
+                    console.log(info.event);
+                    console.log(info.event.extendedProps);
+                },        
+                events: data.events,
+            });
 
-        },
-        header: {
-            close: "fa-times",
-            prev: "fa-chevron-left",
-            next: "fa-chevron-right",
-            prevYear: "fa-angle-double-left",
-            nextYear: "fa-angle-double-right",
-            left: "prev,next today",
-            center: "title",
-            right: "day,week,month,list"
-        },
-        defaultView: view,
-        locale: "es-ES",
-        eventClick: function(info) {
-            loadModal(info.event);
-            console.log(info.event);
-            console.log(info.event.extendedProps);
-        },        
-        events: object.events,
-    });
-
-    calendar.render();
+            calendar.render();
+        })
+        .catch(err => {
+            // Do something for an error here
+        });
+  
 };
 const closeModal = () => $(".modal").hide();
 

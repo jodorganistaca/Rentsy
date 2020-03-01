@@ -40,36 +40,6 @@ router.get("/schedule", async function(req, res) {
     sidebar: true
   };
 
-  parms.myObjects = [{
-    id: 1,
-    name: "Calculadora Texas",
-    description: "Arriendo calculadora texas",
-    priceHour: "$2000/hora",
-    priceDay: "$5000/día",
-    arrendador: {
-      userName: "Juan Sebastián Bravo",
-      email: "js.bravo@uniandes.edu.co"},
-    usuariosInteresados: ["js.bravo@uniandes.edu.co"],
-    events:[{
-      start: new Date(),
-      end: new Date(),
-      /* https://fullcalendar.io/docs/recurring-events 
-    duration: */
-      title: "Calculadora",
-      state: "Arrendado",
-      usuarioArrendatario: "js.bravo@uniandes.edu.co",
-      esRecurrente: true,
-      daysOfWeek:[0,1,2,3,4],
-      startRecur: new Date(),
-      endRecur: new Date(),
-      /* hh:mm:sss */
-      startTime: "09:20",
-      endTime: "09:20"}]
-  
-  
-  }];
-  parms.rentedObjects = [{name:"No Texas"}, {name:"No Texas 2 "}, {name:"No Texas 3"}];
-
   const accessToken = await authHelper.getAccessToken(req.cookies, res);
   const userName = req.cookies.graph_user_name;
   const userEmail = req.cookies.graph_user_email;
@@ -80,11 +50,30 @@ router.get("/schedule", async function(req, res) {
     parms.userEmail = userEmail;
     parms.userToken = accessToken;
   } else {
-    parms.signInUrl = authHelper.getAuthUrl();
-    parms.debug = parms.signInUrl;
+    res.redirect("/");
   }
-  res.render("schedule",parms);
-});
+
+
+
+  var mu = db();
+  mu.dbName("rentsy");
+  mu.connect()
+    .then(client => mu.findByRenter(client, "objects", userEmail))
+    .then(docs => {
+      parms.rentedObjects = docs;
+    })
+    .then(() => mu.connect())
+    .then(client => mu.findByOwner(client, "objects", userEmail))
+    .then(docs => 
+    {
+      parms.myObjects = docs;
+      console.log(parms.myObjects);
+      res.render("schedule", parms);
+    });
+      
+});  
+  
+
 
 router.get("/add", async function(req, res) {
   const accessToken = await authHelper.getAccessToken(req.cookies, res);
@@ -99,6 +88,7 @@ router.get("/add", async function(req, res) {
         res.render("addObject", {
           "objects": docs,
           title: "Arrendar",
+          home: true,
           userName: userName,
           accessToken: accessToken,
           canvasWallpaper: true,
@@ -108,6 +98,50 @@ router.get("/add", async function(req, res) {
   } else {
     res.redirect("/");
   }
+  
+});
+
+router.post("/delete/:id", async function(req, res) {
+
+
+  var mu = db();
+  mu.dbName("rentsy");
+  mu.connect()
+    .then(client => mu.deleteOneObject(client, "objects", req.params.id))
+    .then(docs => {
+      console.log("Return objects: ", docs);
+      res.redirect("/");
+    });  
+  
+});
+
+router.get("/get/:id", async function(req, res) {
+
+
+  var mu = db();
+  mu.dbName("rentsy");
+  mu.connect()
+    .then(client => mu.findByObjectId(client, "objects", req.params.id))
+    .then(docs => {
+      res.json(docs);
+    });  
+  
+});
+
+router.post("/update/:id", async function(req, res) {
+
+  var updatedObject = {
+    description: req.body.description,
+    priceHour: req.body.priceHour,
+    priceDay: req.body.priceDay,
+  };
+  var mu = db();
+  mu.dbName("rentsy");
+  mu.connect()
+    .then(client => mu.updateOneObject(client, "objects", req.params.id, updatedObject))
+    .then(docs => {
+      res.json(docs);
+    });  
   
 });
 

@@ -1,4 +1,5 @@
 const MongoClient = require("mongodb").MongoClient;
+const ObjectId = require("mongodb").ObjectID;
 
 function MongoUtils() {
   const mu = {};
@@ -73,6 +74,26 @@ function MongoUtils() {
     });
   };
 
+  mu.updateOneObject = (client, collectionName, Id, object) => {
+    if (!client || !client.db || !object || !collectionName)
+    { 
+      console.error("ERROR: Empty arguments! at: MongoUtils -> mu.insertOneObject(" + object + "," + client +  ", " + collectionName +")");
+      return;
+    }
+    const objects = client.db(dbName).collection(collectionName);
+    return objects.findOneAndUpdate({ "_id": new ObjectId(Id)}, { $set: object});
+  };
+
+  mu.deleteOneObject = (client, collectionName, Id) => {
+    if (!client || !client.db || !collectionName)
+    { 
+      console.error("ERROR: Empty arguments! at: MongoUtils -> mu.insertOneObject(" + client +  ", " + collectionName +")");
+      return;
+    }
+    const objects = client.db(dbName).collection(collectionName);
+    return objects.findOneAndDelete({ "_id": new ObjectId(Id)});
+  };
+
   mu.dropCollection = (client, collectionName) => 
   {
     client.db(dbName).collection(collectionName).drop(function(err, delOK) {
@@ -82,14 +103,19 @@ function MongoUtils() {
     });
   };
 
-  mu.findByOwner = (client, collectionName, Name) => {
+  mu.findByOwner = async (client, collectionName, Email) => {
     const object = client.db(dbName).collection(collectionName);
-    return object.find({ arrendador: {userName: Name} }).toArray().finally(() => client.close());
+    return  object.find({ "arrendatario.email": Email  }).toArray();
   };
 
-  mu.findByEmailOwner = (client, collectionName, Email) => {
+  mu.findByObjectId =  async (client, collectionName, Id) => {
     const object = client.db(dbName).collection(collectionName);
-    return object.find({ arrendador: {email: Email} }).toArray().finally(() => client.close());
+    return object.find({ "_id": new ObjectId(Id)}).toArray();
+  };
+
+  mu.findByRenter = async (client, collectionName, Email) => {
+    const object = client.db(dbName).collection(collectionName);
+    return object.find({ "arrendador.email": Email  }).toArray();
   };
 
   return mu;
@@ -109,20 +135,18 @@ var objetoPrueba = {
     email: "js.bravo@uniandes.edu.co"},
   usuariosInteresados: ["js.bravo@uniandes.edu.co"],
   events:[{
-    start: new Date(),
-    end: new Date(),
     /* https://fullcalendar.io/docs/recurring-events 
   duration: */
     title: "Calculadora",
     state: "Arrendado",
     usuarioArrendatario: "js.bravo@uniandes.edu.co",
     esRecurrente: true,
-    daysOfWeek:[0,1,2,3,4],
+    daysOfWeek:[0,1,3,4],
     startRecur: new Date(),
-    endRecur: new Date(),
+    endRecur: new Date() + 20000,
     /* hh:mm:sss */
     startTime: "09:20",
-    endTime: "09:20"}]
+    endTime: "12:20"}]
 
 
 };
@@ -136,6 +160,7 @@ var idCollectionInit =     {
 mu.connect()
   .then(client => mu.dropCollection(client, "objects"))
   .catch((err) => console.log(err));
+
 
 
 mu.connect()
@@ -164,7 +189,28 @@ mu.connect()
   .then(docs => {
     console.log("Return objects: ", docs);
   })
-  .catch((err) => console.log(err));*/
+  .catch((err) => console.log(err));
 
 
+mu.connect()
+  .then(client => mu.getObjects(client, "objects"))
+  .then(docs => {
+    console.log("Return objects: ", docs);
+  })
+  .catch((err) => console.log(err));
+
+
+mu.connect()
+  .then(client => mu.dropCollection(client, "objects"))
+  .catch((err) => console.log(err));
+
+
+
+mu.connect()
+  .then((client) => mu.insertOneObject(objetoPrueba, client, "objects"))
+  .catch((err) => console.log(err));
+
+    
+  */
+   
 module.exports = MongoUtils;

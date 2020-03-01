@@ -1,74 +1,126 @@
+{{! Datepicker.js}}
+<link rel='stylesheet' href='/stylesheets/lib/classic.css' />
+<link rel='stylesheet' href='/stylesheets/lib/classic.date.css' />
+<link rel='stylesheet' href='/stylesheets/lib/classic.time.css' />
+
+<link rel="stylesheet" href="/stylesheets/index.css">
 <link rel="stylesheet" href="/stylesheets/addObject.css">
+<link href="https://cdn.jsdelivr.net/gh/gitbrent/bootstrap4-toggle@3.6.1/css/bootstrap4-toggle.min.css"
+    rel="stylesheet">
+<link href="/stylesheets/lib/jquery-weekdays.css" rel="stylesheet">
+<div id="fondoVideo">
+    <video id="bg-video" autoplay="true" loop="loop" preload="metadata" muted="muted">
+        <source src="/Assets/videos/background_video.webm" type="video/webm" />
+    </video>
+</div>
+<div class="col-md-12">
+
+    <body>
 
 
-<!-- Bootstrap row -->
-<div class="row" id="body-row">
-    
 
-    <!-- MAIN -->
-    <div class="col py-3">
+        <div id="booking" class="section">
+            <div class="section-center">
+                <div class="container">
+                    <div class="row">
+                        <div class="col-md-7 col-md-push-5">
+                            <div class="booking-cta">
+                                <h1>RENTSY</h1>
+                                <p>Lorem ipsum dolor sit amet consectetur adipisicing elit. Animi facere, soluta magnam
+                                    consectetur
+                                    molestias itaque
+                                    ad sint fugit architecto incidunt iste culpa perspiciatis possimus voluptates
+                                    aliquid consequuntur
+                                    cumque quasi.
+                                    Perspiciatis.
+                                </p>
+                            </div>
+                        </div>
+                        <div class="col-md-5 col-md-pull-7">
+                            <div class="booking-form">
+                                {{#if userName}}
+                                <div class="booking-form">
+                                    <form method="post" enctype="multipart/form-data" action="/addObject">
+                                        <div class="form-group">
+                                            <span class="form-label">Nombre</span>
+                                            <input name="name" class="form-control" type="text"
+                                                placeholder="Escribe qué objeto deseas poner en arriendo"
+                                                required="true">
+                                        </div>
+                                        <div class="form-group">
+                                            <span class="form-label">Descripción</span>
+                                            <input name="description" class="form-control" type="text"
+                                                placeholder="Escribe una descripción de tu objeto" required="true">
+                                        </div>
 
-        <div class="col-md-12">
+                                        <div class="row" id="divHoras">
+                                            <div class="col-sm-6">
+                                                <div class="form-group">
+                                                    <span class="form-label">Precio por Dia</span>
+                                                    <input name="priceDay" class="form-control" type="text"
+                                                        placeholder="$1,000.00" data-type="currency"
+                                                        pattern="^\$\d{1,3}(,\d{3})*(\.\d+)?$" required="true" />
+                                                </div>
+                                            </div>
+                                            <div class="form-group">
+                                                <span class="form-label">Precio por hora</span>
+                                                <input name="priceHour" class="form-control" type="text"
+                                                    placeholder="$1,000.00" data-type="currency"
+                                                    pattern="^\$\d{1,3}(,\d{3})*(\.\d+)?$" required="true" />
+                                            </div>
+                                        </div>
 
-            <body>
-                <div id="fondoVideo">
-                    <video id="bg-video" autoplay="true" loop="loop" preload="metadata" muted="muted">
-                        <source src="/Assets/videos/background_video.webm" type="video/webm" />
-                    </video>
-                </div>
 
-                <div class="row">
-                    <div class="col-lg-12 mx-auto" style="overflow-y: scroll; height:85vh; ">
-                        <div class="booking-form">
-                            <form method="post" enctype="multipart/form-data" action="/addObject">
+
+                                        <div class="form-group">
+                                            <span class="form-label">Cuándo lo vas a arrendar</span>
+                                            <input name="hora-final" id="date" class="form-control" type="text"
+                                                readonly="true" required="true" aria-haspopup="true"
+                                                placeholder="Elije el rango de fechas">
+                                        </div>
+
+
+
+
+                                        <div class="form-group">
+                                            <span class="form-label">Elije una foto de tu artículo</span>
+                                            <div class="custom-file overflow-hidden rounded-pill mb-5">
+                                                <input id="customFile" type="file"
+                                                    class="custom-file-input" accept=".jpg, .jpeg, .png">
+        
+                                                <label id="fileLabel" for="customFile" class="custom-file-label rounded-pill">Elije un archivo</label>
+                                            </div>
+                                        </div>
+                               
                                 <div class="form-group">
-                                    <span class="form-label">Nombre</span>
-                                    <input name="name" class="form-control" type="text" placeholder="Escribe qué objeto deseas poner en arriendo"
-                                        required="true">
+                                    <input type="submit" value="Publicar" required="true" />
                                 </div>
-                                <div class="form-group">
-                                    <span class="form-label">Descripción</span>
-                                    <input name="description" class="form-control" type="text"  placeholder="Escribe una descripción de tu objeto"
-                                        required="true">
+                                </form>
+                                {{else}}
+                                <p>Esta app usa una API de Microsoft para acceder con Outlook</p>
+                                <div style="width: 50%;
+  margin: 0 auto;">
+                                    <a class="btn btn-primary btn-large" style="margin-left:12px;"
+                                        href="{{signInUrl}}">Inicia Sesión!</a>
                                 </div>
-                                <div class="form-group">
-                                    <span class="form-label">Precio por hora</span>
-                                    <input name="priceHour" type="number" min="1" step="any" placeholder="A que precio lo pones por hora" required="true"/>
-                                </div>
-                                <div class="form-group">
-                                    <span class="form-label">Precio por Dia</span>
-                                    <input name="priceDay" type="number" min="1" step="any" placeholder="A que precio lo pones por dia" required="true"/>
-                                </div>
-                                <div class="form-group">
-                                    <span class="form-label">Fecha Inicio</span>
-                                    <input name="dateBegin" type="date" placeholder="Fecha inicial" required="true"/>
-                                </div>
-                                <div class="form-group">
-                                    <span class="form-label">Fecha Final</span>
-                                    <input name="dateEnd" id="litepicker" placeholder="Fecha final" required="true"/>
-                                </div>
-                                <div class="form-group">
-                                    <span class="form-label">Escoge un archivo</span>
-                                    <input type="file" name="filename" required="true"/>
-                                </div>
-                                <div class="form-group">
-                                    <input type="submit" value="Subir" required="true"/>
-                                </div>
-                            </form>    
+                                {{/if}}
+                            </div>
                         </div>
                     </div>
                 </div>
-
-            </body>
-            <div id="creditos">
-                <div id="creditos-texto">
-                    <p style="color: white !important;">Vídeo de: <a style="color: white !important;"
-                        href="https://filmpac.com/filmpac-site-demo/ref/16/">FILMPAC</a></p>
-                </div>
             </div>
-            <script src="/javascripts/layouts.js"></script>
         </div>
-    </div>
-    <!-- Main Col END -->
-
+        <div id="creditos">
+            <div id="creditos-texto">
+                <p style="color: white !important;">Vídeo de: <a style="color: white !important;"
+                        href="https://filmpac.com/filmpac-site-demo/ref/16/">FILMPAC</a></p>
+            </div>
+        </div>
+    </body><!-- This templates was made by Colorlib (https://colorlib.com) -->
 </div>
+{{! Currency-Formatter}}
+<script src="/javascripts/lib/currency-formatter.js"></script>
+{{! Litepicker}}
+<script src="https://cdn.jsdelivr.net/npm/litepicker/dist/js/main.js"></script>
+{{! Main script}}
+<script src="/javascripts/add.js"></script>
