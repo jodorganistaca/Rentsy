@@ -11,7 +11,7 @@
 <link href='https://cdnjs.cloudflare.com/ajax/libs/fullcalendar/4.2.0/bootstrap/main.min.css' rel='stylesheet' />
 <link href="https://unpkg.com/@fullcalendar/daygrid@4.4.0/main.min.css" rel="stylesheet">
 <link href="https://unpkg.com/@fullcalendar/timegrid@4.4.0/main.min.css" rel="stylesheet">
-<link href="https://unpkg.com/@fullcalendar/list@4.4.0/main.min.css"  rel="stylesheet">
+<link href="https://unpkg.com/@fullcalendar/list@4.4.0/main.min.css" rel="stylesheet">
 <script src="https://unpkg.com/@fullcalendar/core@4.4.0/main.min.js"></script>
 <script src="https://unpkg.com/@fullcalendar/daygrid@4.4.0/main.min.js"></script>
 <script src="https://unpkg.com/@fullcalendar/timegrid@4.4.0/main.min.js"></script>
@@ -30,24 +30,24 @@
     <div class="sidebar-wrapper">
         <ul class="nav">
             <li class="nav-item">
-                <a class="nav-link " href="#" class="dropdown-menu dropdown-menu-right"  data-toggle="dropdown">
+                <a class="nav-link " href="#" class="dropdown-menu dropdown-menu-right" data-toggle="dropdown">
                     <i class="material-icons">stars</i>
                     <p>Mis objetos</p>
                 </a>
                 <ul class="dropdown-menu">
                     {{#each myObjects}}
-                    <li><a href="#" onclick="loadMyObject('{{this.id}}'); return false;"> {{this.name}}</a></li>
+                    <li><a href="#" onclick="loadObject('{{this.id}}'); return false;"> {{this.name}}</a></li>
                     {{/each}}
                 </ul>
             </li>
-           <li class="nav-item">
-                <a class="nav-link " href="#" class="dropdown-menu dropdown-menu-right"  data-toggle="dropdown">
+            <li class="nav-item">
+                <a class="nav-link " href="#" class="dropdown-menu dropdown-menu-right" data-toggle="dropdown">
                     <i class="material-icons">swap_vertical_circle</i>
                     <p>Objetos arrendados</p>
                 </a>
                 <ul class="dropdown-menu">
                     {{#each rentedObjects}}
-                    <li><a href="#" onclick="loadRentedObject('{{this.id}}'); return false;"> {{this.name}}</a></li>
+                    <li><a href="#" onclick="loadObject('{{this._id}}'); return false;"> {{this.name}}</a></li>
                     {{/each}}
                 </ul>
             </li>
@@ -82,7 +82,7 @@
                 <ul class="navbar-nav">
                     {{#if userName}}
                     <li class="nav-item">
-                        <a class="nav-link" href="/add-object" class="nav-link" data-toggle="tooltip"
+                        <a class="nav-link" href="/add" class="nav-link" data-toggle="tooltip"
                             data-placement="bottom" aria-expanded="false" title="Arrendar un objeto">
                             <i class="material-icons">add</i>
                             <p class="d-lg-none d-md-block">
@@ -130,93 +130,65 @@
             <div id="calendar"></div>
         </div>
     </div>
-    <footer class="footer">
-        <div class="container-fluid">
-            <nav class="float-left">
-                <ul>
-                    <li>
-                        <a href="https://www.creative-tim.com">
-                            Creative Tim
-                        </a>
-                    </li>
-                    <li>
-                        <a href="https://creative-tim.com/presentation">
-                            About Us
-                        </a>
-                    </li>
-                    <li>
-                        <a href="http://blog.creative-tim.com">
-                            Blog
-                        </a>
-                    </li>
-                    <li>
-                        <a href="https://www.creative-tim.com/license">
-                            Licenses
-                        </a>
-                    </li>
-                </ul>
-            </nav>
-            <div class="copyright float-right">
-                &copy;
-                <script>
-                    document.write(new Date().getFullYear())
-                </script>, made with <i class="material-icons">favorite</i> by
-                <a href="https://www.creative-tim.com" target="_blank">Creative Tim</a> for a better web.
+
+</div>
+
+
+<div class="modal" tabindex="-1" role="dialog">
+    <div class="modal-dialog" role="document">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h5 class="modal-title"></h5>
+                <button type="button" class="close" onclick="closeModal(); return false;" aria-label="Close">
+                    <span aria-hidden="true">&times;</span>
+                </button>
             </div>
-        </div>
-    </footer>
-
-
-
-</div>
-
-
- <div class="modal" tabindex="-1" role="dialog">
-  <div class="modal-dialog" role="document">
-    <div class="modal-content">
-      <div class="modal-header">
-        <h5 class="modal-title"></h5>
-        <button type="button" class="close"  onclick="closeModal(); return false;" aria-label="Close">
-          <span aria-hidden="true">&times;</span>
-        </button>
-      </div>
-      <div class="modal-body">
-        <form onsubmit="validar();">
-                  <div class="form-group bmd-form-group">
-                    <span class="form-label">Arrendatario</span>
-                    <input class="form-control" type="text" disabled="true" value="{{userName}}">
-                  </div>
-                  <span class="form-label">Arrendador</span>
+            <form id="formId" method="POST">
+                <div class="modal-body">
+                    <div class="form-group bmd-form-group">
+                        <span class="form-label">Arrendatario</span>
+                        <input class="form-control" type="text" disabled="true" value="{{userName}}">
+                    </div>
+                    <span class="form-label">Arrendador</span>
                     <input class="form-control" type="text" id="arrendador" disabled="true">
-                  <div class="form-group">
-    <label for="descripcion" class="bmd-label-floating">Descripción</label>
-    <textarea class="form-control" id="descripcion" rows="3"></textarea>
-  </div>
-                  <div class="row" id="divHoras">
-                    <div class="col-sm-6">
-                      <div class="form-group bmd-form-group">
-                        <span class="form-label">Precio por hora</span>
-                        <input id="precioHora" name="" class="form-control " type="text" required="true" aria-haspopup="true" aria-readonly="false" aria-owns="horaInicial_root">
-                      </div>
+                    <div class="form-group">
+                        <label for="descripcion" class="bmd-label-floating">Descripción</label>
+                        <textarea class="form-control" name="description" id="descripcion" rows="3"></textarea>
                     </div>
-                    <div class="col-sm-6">
-                      <div class="form-group bmd-form-group">
-                        <span class="form-label">Precio por día</span>
-                        <input id="precioDia" class="form-control " type="text"  required="true" aria-haspopup="true" aria-readonly="false" aria-owns="horaFinal_root">
-                      </div>
+                    <div class="row" id="divHoras">
+                        <div class="col-sm-6">
+                            <div class="form-group bmd-form-group">
+                                <span class="form-label">Precio por hora</span>
+                                <input id="precioHora" name="priceHour" class="form-control " type="text"
+                                     aria-haspopup="true" data-type="currency" aria-readonly="false" pattern="^\$\d{1,3}(,\d{3})*(\.\d+)?$"
+                                    aria-owns="horaInicial_root">
+                            </div>
+                        </div>
+                        <div class="col-sm-6">
+                            <div class="form-group bmd-form-group">
+                                <span class="form-label">Precio por día</span>
+                                <input id="precioDia" name="priceDay" data-type="currency" class="form-control " pattern="^\$\d{1,3}(,\d{3})*(\.\d+)?$" type="text"
+                                    aria-haspopup="true" aria-readonly="false" aria-owns="horaFinal_root">
+                            </div>
+                        </div>
                     </div>
-                  </div>
-                </form>
-      </div>
-      <div class="modal-footer">
-          <button type="button" class="btn btn-danger" id="borrar" style="margin-right: 75px;
+                </div>
+                <div class="modal-footer">
+                    <button type="submit" class="btn btn-danger" id="borrar" style="margin-right: 75px;
     background-color: #2042af;"><i class="material-icons">delete_forever</i> Borrar</button>
-        <button type="button" class="btn btn-primary" id="guardar" style="margin-right: 10px"><i class="material-icons">save</i> Guardar</button>
-        <button type="button" class="btn btn-alert" onclick="closeModal(); return false;"><i class="material-icons">close</i>Cerrar </button>
-      </div>
+                    <button type="submit" class="btn btn-primary" id="guardar" style="margin-right: 10px"><i
+                            class="material-icons">save</i> Guardar</button>
+                    <button type="button" class="btn btn-alert" onclick="closeModal(); return false;"><i
+                            class="material-icons">close</i>Cerrar </button>
+                </div>
+            </form>
+
+
+        </div>
+
     </div>
-  </div>
 </div>
+<script src="/javascripts/lib/currency-formatter.js"></script>
 <script src="/javascripts/lib/perfect-scrollbar.js"></script>
 <script src="/javascripts/lib/material-dashboard.js"></script>
 <script src="/javascripts/schedule.js"></script>
