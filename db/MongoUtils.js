@@ -53,7 +53,7 @@ function MongoUtils() {
     const objects = client.db(dbName).collection(collectionName);
 
     console.log("Querying objects by name");
-    return objects.find({ $text: { $search: name } }).toArray().finally(() => client.close());
+    return objects.find({ $text: { $search: name }, events: null  }).toArray().finally(() => client.close());
   }; 
 
   mu.insertOneObject = (object, client, collectionName) => {
@@ -63,6 +63,7 @@ function MongoUtils() {
       return;
     }
     const objects = client.db(dbName).collection(collectionName);
+    console.log("LLegue");
     objects.createIndex( { name: "text" } );
     return objects.insertOne(object, (err, result) => {
       if(err){

@@ -146,6 +146,7 @@ router.post("/update/:id", async function(req, res) {
 });
 
 router.post("/addObject",function(req,res){
+  console.log("Log");
   if(req.files){
     var file = req.files.filename,
       filename = file.name;
@@ -159,26 +160,7 @@ router.post("/addObject",function(req,res){
           name: req.body.name,
           description: req.body.description,
           priceHour: req.body.priceHour,
-          priceDay: req.body.priceDay,
-          arrendador: {
-            userName: "Juan Sebastián Bravo",
-            email: "js.bravo@uniandes.edu.co"},
-          usuariosInteresados: ["js.bravo@uniandes.edu.co"],
-          events:[{
-            start: new Date(),
-            end: new Date(),
-            /* https://fullcalendar.io/docs/recurring-events 
-          duration: */
-            title: "Calculadora",
-            state: "Arrendado",
-            usuarioArrendatario: "js.bravo@uniandes.edu.co",
-            esRecurrente: true,
-            daysOfWeek:[0,1,2,3,4],
-            startRecur: new Date(),
-            endRecur: new Date(),
-            /* hh:mm:sss */
-            startTime: "09:20",
-            endTime: "09:20"}]
+          priceDay: req.body.priceDay
         };
         var mu = db();
         mu.dbName("rentsy");
