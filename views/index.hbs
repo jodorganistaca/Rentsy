@@ -36,15 +36,15 @@
             <div class="col-md-5 col-md-pull-7">
               <div class="booking-form">
                 {{#if userName}}
-                <form method="post" action="/rent" onsubmit="validar();">
+                <form method="post" action="/rent" id="form-id">
                   <div class="form-group">
                     <span class="form-label">Qué necesitas</span>
-                    <input name="objeto" class="form-control" type="text" placeholder="Escribe qué objeto deseas arrendar"
+                    <input name="objeto" id="title" class="form-control" type="text" placeholder="Escribe qué objeto deseas arrendar"
                       required="true">
                   </div>
                   <div class="form-group">
                     <span class="form-label">Cuándo lo necesitas</span>
-                    <input name="fecha" id="litepicker" class="form-control" placeholder="Selecciona el rango de fechas"
+                    <input name="fecha" id="litepicker"class="form-control" placeholder="Selecciona el rango de fechas"
                       required="true" readonly="true">
                   </div>
                   <div class="form-group">
@@ -74,7 +74,7 @@
                     <div id="diasSemana" type="text" required="true"></div>
                   </div>
                   <div class="form-btn">
-                    <button class="submit-btn" id="btn-Submit" disabled="true" type="submit">Buscar</button>
+                    <button class="submit-btn" id="btn-Submit" disabled="true" onclick="saveSearch();" type="submit">Buscar</button>
                   </div>
                 </form>
                 {{else}}
