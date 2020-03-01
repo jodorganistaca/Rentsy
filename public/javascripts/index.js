@@ -1,4 +1,4 @@
-//lint-disable-next-line no-undef
+/* eslint-disable no-unused-vars */
 
 var litepicker;
 

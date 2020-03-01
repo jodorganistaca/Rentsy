@@ -3,7 +3,7 @@ var router = express.Router();
 var authHelper = require("../helpers/auth");
 
 /* GET /authorize. */
-router.get("/", async function (req, res, next) {
+router.get("/", async function (req, res) {
   // Get auth code
   const code = req.query.code;
 
@@ -33,7 +33,7 @@ router.get("/", async function (req, res, next) {
 });
 
 /* GET /authorize/signout */
-router.get("/signout", function (req, res, next) {
+router.get("/signout", function (req, res) {
   authHelper.clearCookies(res);
 
   // Redirect to home

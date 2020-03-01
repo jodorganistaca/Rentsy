@@ -5,7 +5,7 @@ var db = require("../db/MongoUtils");
 
 
 /* GET home page. */
-router.get("/", async function (req, res, next) {
+router.get("/", async function (req, res) {
   let parms = {
     title: "Home",
     active: {
@@ -168,7 +168,7 @@ router.post("/addObject",function(req,res){
           .then(client => mu.insertOneObject(objetoPrueba,client, "objects"))
           .then(docs => {
             console.log("Return objects: ", docs);
-            res.send("done");
+            res.redirect("/");
           });        
       }
     });

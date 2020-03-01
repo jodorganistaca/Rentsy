@@ -1,3 +1,7 @@
+/**
+ * [litepicker1 function for load a Date range picker]
+ * https://wakirin.github.io/Litepicker/
+ */
 const litepicker1 = new Litepicker({
     element: document.getElementById("date"),
     singleMode: false,
