@@ -16,8 +16,10 @@
  */
 
 (function() {
+    // eslint-disable-next-line no-undef
     isWindows = navigator.platform.indexOf("Win") > -1 ? true : false;
   
+    // eslint-disable-next-line no-undef
     if (isWindows) {
         // if we are on windows OS we activate the perfectScrollbar function
         $(".sidebar .sidebar-wrapper, .main-panel, .main").perfectScrollbar();
