@@ -1,10 +1,15 @@
 var calendar;
 
+/**
+ * [Function to load a JavaScript Calendar]
+ * https://fullcalendar.io
+ */
 document.addEventListener("DOMContentLoaded", function () {
     var calendarEl = document.getElementById("calendar");
     //dayGrid dayGridWeek dayGridMonth listWeek 
     var view = "dayGridMonth";
 
+    // eslint-disable-next-line no-undef
     calendar = new FullCalendar.Calendar(calendarEl, {
         buttonText: {
             today: "Hoy"
@@ -84,6 +89,10 @@ document.addEventListener("DOMContentLoaded", function () {
     calendar.render();
 });
 
+/**
+ * [loadModal function to see a modal window with the info of the object in the Calendar]
+ * @param  {[array of JSON]} event [this parameter have the info of the object in the Calendar]
+ */
 const loadModal = (event) => 
 {
     console.log("event", event.extendedProps);
@@ -113,6 +122,10 @@ const loadModal = (event) =>
     $(".modal").show();
 };
 
+/**
+ * [loadOject function for render the objects in the Calendar]
+ * @param  {[int]} id [the id of every object that the user have]
+ */
 const loadObject = (id) => 
 {
     calendar.destroy();
@@ -195,10 +208,14 @@ const loadObject = (id) =>
             calendar.render();
         })
         .catch(err => {
+            console.log(err);
             // Do something for an error here
         });
   
 };
+/**
+ * [closeModal function to hide the modal window]
+ */
 const closeModal = () => $(".modal").hide();
 
 $(".modal").on("shown.bs.modal", function () {
