@@ -1,5 +1,18 @@
 //lint-disable-next-line no-undef
 
+var litepicker;
+
+const saveSearch = () => 
+{
+    localStorage.setItem("title", $("#title").val());
+    localStorage.setItem("start", JSON.stringify(litepicker.getStartDate()));
+    localStorage.setItem("end", JSON.stringify(litepicker.getEndDate()));
+    localStorage.setItem("esRecurrente", $("#esRecurrente").val());
+    localStorage.setItem("startRecur", $("#horaInicial").val());
+    localStorage.setItem("endRecur", $("#horaFinal").val());
+    localStorage.setItem("daysOfWeek", JSON.stringify($("#diasSemana").selectedIndexes()));
+    document.getElementById("form-id").submit();
+};
 
 const cambiarVista = () => {
     let esRecurrente = document.getElementById("esRecurrente").checked;
@@ -23,7 +36,7 @@ const cambiarVista = () => {
 
 try
 {
-    const litepicker = new Litepicker({
+    litepicker = new Litepicker({
         element: document.getElementById("litepicker"),
         singleMode: false,
         lang: "es-ES",
