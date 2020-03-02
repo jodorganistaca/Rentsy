@@ -1,0 +1,185 @@
+{{! Main CSS Schedule}}
+<link href="/stylesheets/schedule.css" rel="stylesheet">
+<link href="/stylesheets/rent.css" rel="stylesheet">
+{{! Fontawesome}}
+<link href="https://stackpath.bootstrapcdn.com/font-awesome/4.7.0/css/font-awesome.min.css" rel="stylesheet"
+    integrity="sha384-wvfXpqpZZVQGK6TAh5PVlGOfQNHSoD2xbE+QkPxCAFlNEevoEH3Sl0sibVcOQVnN" crossorigin="anonymous">
+{{! Fullcalendar.js}}
+<link href="https://unpkg.com/@fullcalendar/core@4.4.0/main.min.css" rel="stylesheet">
+{{! Main CSS Schedule}}
+<link href="/stylesheets/core/navbar.css" rel="stylesheet">
+{{! Fullcalendar.js}}
+<link href='https://cdnjs.cloudflare.com/ajax/libs/fullcalendar/4.2.0/bootstrap/main.min.css' rel='stylesheet' />
+<link href="https://unpkg.com/@fullcalendar/daygrid@4.4.0/main.min.css" rel="stylesheet">
+<link href="https://unpkg.com/@fullcalendar/timegrid@4.4.0/main.min.css" rel="stylesheet">
+<link href="https://unpkg.com/@fullcalendar/list@4.4.0/main.min.css" rel="stylesheet">
+<script src="https://unpkg.com/@fullcalendar/core@4.4.0/main.min.js"></script>
+<script src="https://unpkg.com/@fullcalendar/daygrid@4.4.0/main.min.js"></script>
+<script src="https://unpkg.com/@fullcalendar/timegrid@4.4.0/main.min.js"></script>
+<script src="https://unpkg.com/@fullcalendar/list@4.4.0/main.min.js"></script>
+<script src='https://cdnjs.cloudflare.com/ajax/libs/fullcalendar/4.2.0/bootstrap/main.min.js'></script>
+
+<div class="sidebar" data-color="danger" data-background-color="white" data-image="../assets/img/sidebar-1.jpg">
+    <!--
+        Tip 1: You can change the color of the sidebar using: data-color="purple | azure | green | orange | danger"
+
+        Tip 2: you can also add an image using data-image tag
+    -->
+    <div class="logo"><a href="#" class="simple-text logo-normal">
+            Mi Calendario
+        </a></div>
+    <div class="sidebar-wrapper">
+        <ul class="nav">
+            <li class="nav-item">
+                <a class="nav-link " href="#" class="dropdown-menu dropdown-menu-right" data-toggle="dropdown">
+                    <i class="material-icons">stars</i>
+                    <p>Mis objetos</p>
+                </a>
+                <ul class="dropdown-menu">
+                    {{#each myObjects}}
+                    <li><a href="#" onclick="loadObject('{{this.id}}'); return false;"> {{this.name}}</a></li>
+                    {{/each}}
+                </ul>
+            </li>
+            <li class="nav-item">
+                <a class="nav-link " href="#" class="dropdown-menu dropdown-menu-right" data-toggle="dropdown">
+                    <i class="material-icons">swap_vertical_circle</i>
+                    <p>Objetos arrendados</p>
+                </a>
+                <ul class="dropdown-menu">
+                    {{#each rentedObjects}}
+                    <li><a href="#" onclick="loadObject('{{this._id}}'); return false;"> {{this.name}}</a></li>
+                    {{/each}}
+                </ul>
+            </li>
+        </ul>
+    </div>
+</div>
+<div class="main-panel">
+    <nav class="navbar navbar-expand-lg navbar-transparent navbar-absolute fixed-top ">
+        <div class="container-fluid">
+            <div class="navbar-wrapper">
+                <a class="navbar-brand" href="javascript:;">Rentsy</a>
+            </div>
+            <button class="navbar-toggler" type="button" data-toggle="collapse" aria-controls="navigation-index"
+                aria-expanded="false" aria-label="Toggle navigation">
+                <span class="sr-only">Activar navegación</span>
+                <span class="navbar-toggler-icon icon-bar"></span>
+                <span class="navbar-toggler-icon icon-bar"></span>
+                <span class="navbar-toggler-icon icon-bar"></span>
+            </button>
+            <div class="collapse navbar-collapse justify-content-end">
+                {{#if userName}}
+                <form class="navbar-form">
+                    <div class="input-group no-border">
+                        <input type="text" value="" class="form-control" placeholder="Busca un objeto">
+                        <button type="submit" class="btn btn-white btn-round btn-just-icon">
+                            <i class="material-icons">search</i>
+                            <div class="ripple-container"></div>
+                        </button>
+                    </div>
+                </form>
+                {{/if}}
+                <ul class="navbar-nav">
+                    {{#if userName}}
+                    <li class="nav-item">
+                        <a class="nav-link" href="/add" class="nav-link" data-toggle="tooltip"
+                            data-placement="bottom" aria-expanded="false" title="Arrendar un objeto">
+                            <i class="material-icons">add</i>
+                            <p class="d-lg-none d-md-block">
+                                Arrendar
+                            </p>
+                        </a>
+                    </li>
+                    <li class="nav-item">
+                        <a href="/schedule" class="nav-link" data-toggle="tooltip" data-placement="bottom"
+                            aria-expanded="false" title="Mi calendario">
+                            <i class="material-icons">date_range</i>
+                            <p class="d-lg-none d-md-block">
+                                Mi Calendario
+                            </p>
+                        </a>
+                    </li>
+                    {{/if}}
+                    <li class="nav-item dropdown">
+                        <a class="nav-link" href="javascript:;" id="navbarDropdownProfile" data-toggle="dropdown"
+                            aria-haspopup="true" aria-expanded="false" title="Mi perfil" style="padding-top: 21px;">
+                            <div class="photo">
+                                <i class="material-icons" id="foto-alternativa">person</i>
+                                <img id="foto-de-perfil">
+                            </div>
+
+                            <p class="d-lg-none d-md-block">
+                                Mi cuenta
+                            </p>
+                        </a>
+                        <div class="dropdown-menu dropdown-menu-right" aria-labelledby="navbarDropdownProfile">
+                            {{#if userName}}
+                            <a href="/authorize/signout" class="dropdown-item">Cerrar sesión</a>
+                            {{else}}
+                            <a href="{{signInUrl}}" class="dropdown-item">Iniciar sesión</a>
+                            {{/if}}
+                        </div>
+                    </li>
+                </ul>
+            </div>
+        </div>
+    </nav>
+
+    <div class="content">
+        <div class="container-fluid">
+            <div class="col py-3">
+
+        <div class="col-md-12">
+
+            <body>
+
+                <div class="row">
+                    <div class="col-lg-12 mx-auto" style="overflow-y: scroll; height:85vh; ">
+                        <!-- List group-->
+                        <ul class="list-group shadow" style="margin-top: 6px;">
+                            <!-- list group item-->
+                            {{#each objects}}
+                            <li class="list-group-item objetos">
+                                <!-- Custom content-->
+                                <div class="media align-items-lg-center flex-column flex-lg-row p-3">
+                                    <div class="media-body order-2 order-lg-1">
+                                        <h5 class="mt-0 font-weight-bold mb-2">{{this.name}}</h5>
+                                        <p class="font-italic text-muted mb-0 small">{{this.description}}</p>
+                                        <div class="d-flex align-items-center justify-content-between mt-1">
+                                            <h6 class="font-weight-bold my-2">{{this.priceHour}}</h6>
+                                        </div>
+                                    </div><img src="data:{{this.image.contentType}};base64,{{this.image.base64}}" alt="Imagen del objeto" width="200"
+                                        class="ml-lg-5 order-1 order-lg-2">
+                                    <div class="detail">
+                                        <form action="/rent/{{this._id}}" method="POST" id="form-id">
+                                        <input name="hidden" style="display: none;">
+                                        <p>Publicado por: {{this.arrendador.userName}} </p>
+                                        <a href="#" class="btn btn-primary" onclick="arrendar(); return false;">Arrendar</a>
+                                        </form>
+                                    </div>
+                                </div>
+                                <!-- End -->
+
+                            </li>
+                            {{/each}}
+                            <!-- End -->
+                        </ul>
+                        <!-- End -->
+                    </div>
+                </div>
+
+            </body>
+            
+        </div>
+    </div>
+        </div>
+    </div>
+
+</div>
+
+
+</div>
+
+{{! Main script}}
+<script src="/javascripts/rent.js"></script>
