@@ -4,6 +4,7 @@ var authHelper = require("../helpers/auth");
 var db = require("../db/MongoUtils");
 var upload = require("../db/upload");
 
+
 /* GET home page. */
 router.get("/", async function (req, res) {
   let parms = {
@@ -182,36 +183,67 @@ router.post("/addObject",  async function (req, res) {
   
 });
 
-router.post("/rent", async function(req,res){
-  const accessToken = await authHelper.getAccessToken(req.cookies, res);
+router.post("/rent/:id", async function(req,res){
+
+  let start = JSON.parse(req.query.start);
+  console.log(start);
+  let end = JSON.parse(req.query.end);
+  console.log(end);
+  let daysOfWeek = JSON.parse(req.query.daysOfWeek);
+  console.log(daysOfWeek);
+  let startRecur = req.query.startRecur;
+  console.log(startRecur);
+  let endRecur = req.query.endRecur;
+  console.log(endRecur);
+  let title = req.query.title;
   const userName = req.cookies.graph_user_name;
+  const userEmail = req.cookies.graph_user_email;
+  const accessToken = await authHelper.getAccessToken(req.cookies, res);
+  var updatedObject = {};
+  if (startRecur != "")
+  {
+    updatedObject["$set"] =  {arrendatario: userEmail};
+    updatedObject["$push"] = {  "events": 
+                      { "startRecur": startRecur,
+                        "endRecur": endRecur,
+                        "daysOfWeek": daysOfWeek,
+                        "title": title
+                       
+                      }};
+      
+  }
+  else
+  {
+    updatedObject["$set"] =  {arrendador: userEmail};
+    updatedObject["$push"] = {  "events": 
+                      { "start": start,
+                        "end": end,
+                        "daysOfWeek": daysOfWeek,
+                        "title": title,
+                        "allDay": true
+                       
+                      }};
+  }
+  console.log(updatedObject);
   if (accessToken && userName) {
     var mu = db();
     mu.dbName("rentsy");
     mu.connect()
-      .then(client => mu.findByName(client, "objects", req.body.objeto))
-      .then(docs => { 
-        console.log("Return objects: ", docs);
-        res.render("rent", {
-          "objects": docs,
-          title: "Arrendar",
-          userName: userName,
-          accessToken: accessToken,
-          sidebar: true,
-          canvasWallpaper: true,
-          searchQuery: ["Calculadora", "Texas"]
-        });
-      });
+      .then(client => mu.pushOneObject(client, "objects", req.params.id, updatedObject))
+      .then(
+        res.redirect("/"));
+        
+    
+  
   } else {
     res.redirect("/");
   }
 });
 
-router.get("/rent", async function (req, res) { 
+router.post("/rent", async function (req, res) { 
 
   const accessToken = await authHelper.getAccessToken(req.cookies, res);
   const userName = req.cookies.graph_user_name;
-  console.log(req.cookies);
   if (accessToken && userName) {
     var mu = db();
     mu.dbName("rentsy");
@@ -225,8 +257,32 @@ router.get("/rent", async function (req, res) {
           userName: userName,
           accessToken: accessToken,
           sidebar: true,
-          canvasWallpaper: true,
-          searchQuery: ["Calculadora", "Texas"]
+          canvasWallpaper: true
+        });
+      });
+  } else {
+    res.redirect("/");
+  }
+});
+
+router.get("/rent", async function (req, res) { 
+
+  const accessToken = await authHelper.getAccessToken(req.cookies, res);
+  const userName = req.cookies.graph_user_name;
+  if (accessToken && userName) {
+    var mu = db();
+    mu.dbName("rentsy");
+    mu.connect()
+      .then(client => mu.getObjects(client, "objects"))
+      .then(docs => {
+        //console.log("Return objects: ", docs);
+        res.render("rent", {
+          "objects": docs,
+          title: "Arrendar",
+          userName: userName,
+          accessToken: accessToken,
+          sidebar: true,
+          canvasWallpaper: true
         });
       });
   } else {
