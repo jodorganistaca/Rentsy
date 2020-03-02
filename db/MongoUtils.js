@@ -5,8 +5,8 @@ function MongoUtils() {
   const mu = {};
 
   let hostname = "localhost",
-    port = 27017,
-    dbName = "rentsy";
+    port = process.env.DB_PORT,
+    dbName = process.env.DB_NAME;
 
   mu.dbName = _ => (_ !== undefined ? ((dbName = _), mu) : dbName);
   mu.hostname = _ => (_ !== undefined ? ((hostname = _),mu) : hostname);
