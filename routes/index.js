@@ -2,6 +2,8 @@ var express = require("express");
 var router = express.Router();
 var authHelper = require("../helpers/auth");
 var db = require("../db/MongoUtils");
+var upload = require("../db/upload");
+var fs = require("fs");
 
 
 /* GET home page. */
@@ -145,41 +147,40 @@ router.post("/update/:id", async function(req, res) {
   
 });
 
-router.post("/addObject",function(req,res){
-  console.log("Log");
+router.post("/addObject",  async function (req, res) {
   if(req.files){
-    var file = req.files.filename,
-      filename = file.name;
-    file.mv("./upload/"+filename,function(err){
-      if(err){
-        console.log(err);
-        res.send("error in upload file");
-      }else{
-        console.log("request bodyyyy!!",req);
-        var objetoPrueba = {
-          name: req.body.name,
-          description: req.body.description,
-          priceHour: req.body.priceHour,
-          priceDay: req.body.priceDay
-        };
-        var mu = db();
-        mu.dbName("rentsy");
-        mu.connect()
-          .then(client => mu.insertOneObject(objetoPrueba,client, "objects"))
-          .then(docs => {
-            console.log("Return objects: ", docs);
-            res.redirect("/");
-          });        
-      }
-    });
-    console.log(filename);
-  //var file = req.files.filename,
-  }
+    upload.single("file");
+    console.log(req.body);
+    // Define a JSONobject for the image attributes for saving to database
+    var nameFile = `${Date.now()}-${req.files.file.name}`;
+    var finalImg = {
+      name: nameFile,
+      contentType: req.files.file.mimetype,
+      base64:  new Buffer(req.files.file.data).toString("base64")
+    };
+
+    var objetoPrueba = {
+      name: req.body.name,
+      description: req.body.description,
+      priceHour: req.body.priceHour,
+      priceDay: req.body.priceDay,
+      image: finalImg
+    };
+    var mu = db();
+    mu.dbName("rentsy");
+    mu.connect()
+      .then(client => mu.insertOneObject(objetoPrueba,client, "objects"))
+      .then(docs => {
+        console.log("Return objects: ", docs);
+        res.redirect("/");
+      });    
+  }else{
+    res.send("algo paso");
+  }  
+  
 });
 
 router.post("/rent", async function(req,res){
-  console.log("request bodyyyy!!",req);
-  console.log("nameeee: ", req.body.objeto);
   const accessToken = await authHelper.getAccessToken(req.cookies, res);
   const userName = req.cookies.graph_user_name;
   if (accessToken && userName) {
@@ -187,7 +188,7 @@ router.post("/rent", async function(req,res){
     mu.dbName("rentsy");
     mu.connect()
       .then(client => mu.findByName(client, "objects", req.body.objeto))
-      .then(docs => {
+      .then(docs => { 
         console.log("Return objects: ", docs);
         res.render("rent", {
           "objects": docs,
