@@ -63,13 +63,14 @@ function MongoUtils() {
       return;
     }
     const objects = client.db(dbName).collection(collectionName);
+    console.log("object to insert", object);
     console.log("LLegue");
     objects.createIndex( { name: "text" } );
     return objects.insertOne(object, (err, result) => {
       if(err){
-        console.log(err);
+        //console.log(err);
       }else{
-        console.log(result);
+        //console.log(result);
       }
       client.close();
     });
