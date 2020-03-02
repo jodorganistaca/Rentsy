@@ -12,10 +12,7 @@ All the listed prerrequisites must be installed in order to use the application.
     ```bash
     $ git clone https://github.com/jodorganistaca/Rentsy.git
     ```
-* Go to project directory
-    ```bash
-    $ cd event_calendar
-    ```
+
 * Install dependencies from package.json
     ```bash
     $ npm install
@@ -34,6 +31,16 @@ All the listed prerrequisites must be installed in order to use the application.
     ``` bash
     $ npm start
     ```
+ * The application uses Microsoft OAuth, therefore is required, inside a file named .env in root directory of the project:
+  ``` bash
+    DB_NAME = <mongo_db_name>
+    DB_PORT = <mongo_db_port>
+    APP_ID = <microsoft_app_id>
+    APP_PASSWORD = <microsoft_app_password>
+    APP_SCOPES = <microsoft_app_scopes>
+    REDIRECT_URI = <microsoft authorized redirect_uri>
+    ```
+
 ### Application Usage
 * Go to your browser go to http://localhost:3000
 
