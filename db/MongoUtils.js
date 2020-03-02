@@ -86,6 +86,16 @@ function MongoUtils() {
     return objects.findOneAndUpdate({ "_id": new ObjectId(Id)}, { $set: object});
   };
 
+  mu.pushOneObject = (client, collectionName, Id, object) => {
+    if (!client || !client.db || !object || !collectionName)
+    { 
+      console.error("ERROR: Empty arguments! at: MongoUtils -> mu.insertOneObject(" + object + "," + client +  ", " + collectionName +")");
+      return;
+    }
+    const objects = client.db(dbName).collection(collectionName);
+    return objects.findOneAndUpdate({ "_id": new ObjectId(Id)}, object);
+  };
+
   mu.deleteOneObject = (client, collectionName, Id) => {
     if (!client || !client.db || !collectionName)
     { 

@@ -149,11 +149,14 @@
                                         <div class="d-flex align-items-center justify-content-between mt-1">
                                             <h6 class="font-weight-bold my-2">{{this.priceHour}}</h6>
                                         </div>
-                                    </div><img src="data:{{this.image.contentType}};base64,{{this.image.base64}}" alt="Generic placeholder image" width="200"
+                                    </div><img src="data:{{this.image.contentType}};base64,{{this.image.base64}}" alt="Imagen del objeto" width="200"
                                         class="ml-lg-5 order-1 order-lg-2">
                                     <div class="detail">
+                                        <form action="/rent/{{this._id}}" method="POST" id="form-id">
+                                        <input name="hidden" style="display: none;">
                                         <p>Publicado por: {{this.arrendador.userName}} </p>
-                                        <a href="/rent/{{this._id}}" class="btn btn-primary ">Arrendar</a>
+                                        <a href="#" class="btn btn-primary" onclick="arrendar(); return false;">Arrendar</a>
+                                        </form>
                                     </div>
                                 </div>
                                 <!-- End -->
@@ -177,3 +180,6 @@
 
 
 </div>
+
+{{! Main script}}
+<script src="/javascripts/rent.js"></script>

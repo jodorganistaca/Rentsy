@@ -10,7 +10,7 @@ const saveSearch = () =>
     localStorage.setItem("esRecurrente", $("#esRecurrente").val());
     localStorage.setItem("startRecur", $("#horaInicial").val());
     localStorage.setItem("endRecur", $("#horaFinal").val());
-    localStorage.setItem("daysOfWeek", JSON.stringify($("#diasSemana").selectedIndexes()));
+    localStorage.setItem("daysOfWeek", JSON.stringify($("#diasSemana").selectedIndexes().toArray()));
     document.getElementById("form-id").submit();
 };
 
@@ -59,9 +59,9 @@ try
                 clear: "Limpiar selección",
     
                 // Formats
-                format: "h:i A",
+                format: "HH:i",
                 formatLabel: undefined,
-                formatSubmit: undefined,
+                formatSubmit: "HH:i",
                 hiddenPrefix: undefined,
                 hiddenSuffix: "_submit",
     

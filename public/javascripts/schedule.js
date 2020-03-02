@@ -136,13 +136,14 @@ const loadObject = (id) =>
             var calendarEl = document.getElementById("calendar");
             //dayGrid dayGridWeek dayGridMonth listWeek 
             var view = "dayGridMonth";
-            data.events.forEach(function(part, index) {
-                data.events[index]._id =  "5e5865f875c48d1126e209b6";
-                data.events[index].name =  "Calculadora Texas";
-                data.events[index].description = "Arriendo calculadora texas";
-                data.events[index].priceHour =  "2000";
-                data.events[index].priceDay =  "5000";
-            });
+            if(data.events){
+                data.events.forEach(function(part, index) {
+                    data.events[index]._id =  "5e5865f875c48d1126e209b6";
+                    data.events[index].name =  "Calculadora Texas";
+                    data.events[index].description = "Arriendo calculadora texas";
+                    data.events[index].priceHour =  "2000";
+                    data.events[index].priceDay =  "5000";
+                });}
               
             calendar = new FullCalendar.Calendar(calendarEl, {
                 buttonText: {
