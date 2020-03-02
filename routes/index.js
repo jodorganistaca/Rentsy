@@ -3,8 +3,6 @@ var router = express.Router();
 var authHelper = require("../helpers/auth");
 var db = require("../db/MongoUtils");
 var upload = require("../db/upload");
-var fs = require("fs");
-
 
 /* GET home page. */
 router.get("/", async function (req, res) {
