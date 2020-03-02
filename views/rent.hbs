@@ -149,7 +149,7 @@
                                         <div class="d-flex align-items-center justify-content-between mt-1">
                                             <h6 class="font-weight-bold my-2">{{this.priceHour}}</h6>
                                         </div>
-                                    </div><img src="{{this.photoURL}}" alt="Generic placeholder image" width="200"
+                                    </div><img src="data:{{this.image.contentType}};base64,{{this.image.base64}}" alt="Generic placeholder image" width="200"
                                         class="ml-lg-5 order-1 order-lg-2">
                                     <div class="detail">
                                         <p>Publicado por: {{this.arrendador.userName}} </p>
