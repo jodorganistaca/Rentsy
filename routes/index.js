@@ -164,6 +164,10 @@ router.post("/addObject",  async function (req, res) {
       description: req.body.description,
       priceHour: req.body.priceHour,
       priceDay: req.body.priceDay,
+      arrendador: {
+        userName: req.cookies.graph_user_name,
+        email: req.cookies.graph_user_email
+      },
       image: finalImg
     };
     var mu = db();
@@ -209,13 +213,14 @@ router.get("/rent", async function (req, res) {
 
   const accessToken = await authHelper.getAccessToken(req.cookies, res);
   const userName = req.cookies.graph_user_name;
+  console.log(req.cookies);
   if (accessToken && userName) {
     var mu = db();
     mu.dbName("rentsy");
     mu.connect()
       .then(client => mu.getObjects(client, "objects"))
       .then(docs => {
-        console.log("Return objects: ", docs);
+        //console.log("Return objects: ", docs);
         res.render("rent", {
           "objects": docs,
           title: "Arrendar",
