@@ -46,3 +46,4 @@ All the listed prerrequisites must be installed in order to use the application.
 
 ### **License**
 **Rentsy** is a open-source software licensed under the MIT License.
+
