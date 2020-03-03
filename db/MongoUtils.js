@@ -1,9 +1,10 @@
 const MongoClient = require("mongodb").MongoClient;
 const ObjectId = require("mongodb").ObjectID;
-
+//Documenten todo por favor
 function MongoUtils() {
   const mu = {};
 
+  //Muy bien que utilicen variables de entorno
   let hostname = "localhost",
     port = process.env.DB_PORT,
     dbName = process.env.DB_NAME;
@@ -76,10 +77,11 @@ function MongoUtils() {
     });
   };
 
+  //No muestren errores por consola, si quieren hacer eso mejor creen un log file
   mu.updateOneObject = (client, collectionName, Id, object) => {
     if (!client || !client.db || !object || !collectionName)
     { 
-      console.error("ERROR: Empty arguments! at: MongoUtils -> mu.insertOneObject(" + object + "," + client +  ", " + collectionName +")");
+      
       return;
     }
     const objects = client.db(dbName).collection(collectionName);
@@ -89,7 +91,7 @@ function MongoUtils() {
   mu.pushOneObject = (client, collectionName, Id, object) => {
     if (!client || !client.db || !object || !collectionName)
     { 
-      console.error("ERROR: Empty arguments! at: MongoUtils -> mu.insertOneObject(" + object + "," + client +  ", " + collectionName +")");
+     
       return;
     }
     const objects = client.db(dbName).collection(collectionName);
@@ -99,7 +101,7 @@ function MongoUtils() {
   mu.deleteOneObject = (client, collectionName, Id) => {
     if (!client || !client.db || !collectionName)
     { 
-      console.error("ERROR: Empty arguments! at: MongoUtils -> mu.insertOneObject(" + client +  ", " + collectionName +")");
+    
       return;
     }
     const objects = client.db(dbName).collection(collectionName);
@@ -110,7 +112,7 @@ function MongoUtils() {
   {
     client.db(dbName).collection(collectionName).drop(function(err, delOK) {
       if (err) throw err;
-      if (delOK) console.log("Collection: " +collectionName + " deleted");
+      if (delOK) 
       client.close();
     });
   };
@@ -125,6 +127,7 @@ function MongoUtils() {
     return object.find({ "_id": new ObjectId(Id)}).toArray();
   };
 
+  // No entiendo aun por qué usan async sin await
   mu.findByRenter = async (client, collectionName, Email) => {
     const object = client.db(dbName).collection(collectionName);
     return object.find({ "arrendador.email": Email  }).toArray();
