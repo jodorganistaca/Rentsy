@@ -1,6 +1,8 @@
 const MongoClient = require("mongodb").MongoClient;
 const ObjectId = require("mongodb").ObjectID;
 
+/* Comentario David Bautista: Me pareció muy bien que hayan utilizado tantas funciones hacia la base de datos aparte de las que vimos como find() */
+
 function MongoUtils() {
   const mu = {};
 
