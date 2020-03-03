@@ -1,7 +1,13 @@
 <!DOCTYPE html>
-<html>
+<!--Consideren utilizar la etiqueta lang-->
+<html lang="esp">
+<!--En el otro html les deje los meta tags se los vuelvo a dejar aquí-->
 
 <head>
+  <meta name="description" content="Rentsy">
+  <meta name="keywords" content="HTML,CSS,XML,JavaScript">
+  <meta name="author" content="Sebastián y jose">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <meta charset="utf-8">
   <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
   <title>{{title}}</title>
@@ -13,6 +19,7 @@
     href="https://unpkg.com/bootstrap-material-design@4.1.1/dist/css/bootstrap-material-design.min.css"
     integrity="sha384-wXznGJNEXNG1NFsbm0ugrLFMQPWswR3lds2VeinahP8N0zJw9VWSopbjv2x7WCvX" crossorigin="anonymous">
   {{! Main styles}}
+  <!--Según yo la carga de los scripts debería estar en el body y no en el head pero no se si cambie con el sistema de plantillas que están usando-->
   <link rel="stylesheet" href="/stylesheets/core/material-icons.css">
   {{! Bootstrap Core: JQuery & Popper & Bootstrap}}
   <script src="https://code.jquery.com/jquery-3.2.1.slim.min.js"
