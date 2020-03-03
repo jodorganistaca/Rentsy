@@ -1,10 +1,14 @@
-var express = require("express");
-var router = express.Router();
-var authHelper = require("../helpers/auth");
-var db = require("../db/MongoUtils");
-var upload = require("../db/upload");
+// Recuerden que la nueva norma RECOMIENDA no usar var sino let y const
+const express = require("express");
+const router = express.Router();
+const authHelper = require("../helpers/auth");
+const db = require("../db/MongoUtils");
+const upload = require("../db/upload");
 
 
+/**
+* No entiendo para que utilizan async sin un await dentro de la función, yo lo quitaría
+*/
 /* GET home page. */
 router.get("/", async function (req, res) {
   let parms = {
@@ -14,6 +18,8 @@ router.get("/", async function (req, res) {
     },
     home: true
   };
+  
+  //Documenten todo lo que hagan
 
   const accessToken = await authHelper.getAccessToken(req.cookies, res);
   const userName = req.cookies.graph_user_name;
@@ -31,6 +37,8 @@ router.get("/", async function (req, res) {
 
   res.render("index", parms);
 });
+
+//Lo mismo de arriba
 
 router.get("/schedule", async function(req, res) {
   let parms = {
@@ -130,13 +138,13 @@ router.get("/get/:id", async function(req, res) {
 });
 
 router.post("/update/:id", async function(req, res) {
-
-  var updatedObject = {
+//No usen var
+  const updatedObject = {
     description: req.body.description,
     priceHour: req.body.priceHour,
     priceDay: req.body.priceDay,
   };
-  var mu = db();
+  const mu = db();
   mu.dbName("rentsy");
   mu.connect()
     .then(client => mu.updateOneObject(client, "objects", req.params.id, updatedObject))
@@ -149,6 +157,7 @@ router.post("/update/:id", async function(req, res) {
 router.post("/addObject",  async function (req, res) {
   if(req.files){
     upload.single("file");
+    //Quiten los console 
     console.log(req.body);
     // Define a JSONobject for the image attributes for saving to database
     var nameFile = `${Date.now()}-${req.files.file.name}`;
@@ -157,8 +166,8 @@ router.post("/addObject",  async function (req, res) {
       contentType: req.files.file.mimetype,
       base64:  new Buffer(req.files.file.data).toString("base64")
     };
-
-    var objetoPrueba = {
+  //No usen var
+    const objetoPrueba = {
       name: req.body.name,
       description: req.body.description,
       priceHour: req.body.priceHour,
@@ -169,7 +178,7 @@ router.post("/addObject",  async function (req, res) {
       },
       image: finalImg
     };
-    var mu = db();
+    const mu = db();
     mu.dbName("rentsy");
     mu.connect()
       .then(client => mu.insertOneObject(objetoPrueba,client, "objects"))
@@ -184,7 +193,7 @@ router.post("/addObject",  async function (req, res) {
 });
 
 router.post("/rent/:id", async function(req,res){
-
+//No coloquen los console.log() en la versión final del repositorio
   let start = JSON.parse(req.query.start);
   console.log(start);
   let end = JSON.parse(req.query.end);
