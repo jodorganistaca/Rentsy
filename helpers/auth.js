@@ -1,3 +1,5 @@
+// Coloquen modo strict// Whole-script strict mode syntax
+"use strict";
 const jwt = require("jsonwebtoken");
 
 const credentials = {
@@ -52,6 +54,8 @@ function saveValuesToCookie(token, res) {
   // Save the user's name in a cookie
   res.cookie("graph_user_email", user.preferred_username, {maxAge: 3600000, httpOnly: true});
 }
+
+// Me gusta que usan las cookies
 
 function clearCookies(res) {
   // Clear cookies
